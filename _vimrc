@@ -378,4 +378,5 @@ endif
 
 Bundle 'Shougo/neocomplcache'
 Bundle 'scrooloose/nerdtree'
+Bundle 'altercation/vim-colors-solarized'
 filetype plugin indent on
