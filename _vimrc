@@ -379,5 +379,25 @@ endif
 Bundle 'Shougo/neocomplcache'
 Bundle 'scrooloose/nerdtree'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'mrtazz/simplenote'
+Bundle 'mattn/vimplenote-vim'
+"Bundle 'mrtazz/simplenote.vim'
+"Bundle 'mattn/vim-metarw'
+Bundle 'mattn/webapi-vim'
+"Bundle 'mattn/vim-metarw-simplenote'
 filetype plugin indent on
+
+"simplenote
+"cnoremap <Leader>sn_email kojopy-mes@hotmail.co.jp
+"cnoremap <Leader>sn_pass kako1dse
+"let g:SimplenoteUsername = ""
+"let g:SimplenotePassword = "kako1dse"
+nnoremap :sn :<C-u>VimpleNote -n<CR>kojopy-mes@hotmail.co.jp<CR>bepjuoltqphkdbuk<CR>
+nnoremap :sl :<C-u>VimpleNote -l<CR>kojopy-mes@hotmail.co.jp<CR>bepjuoltqphkdbuk<CR>
+
+"keymap
+inoremap {} {}<LEFT>
+inoremap [] []<LEFT>
+inoremap () ()<LEFT>
+inoremap "" ""<LEFT>
+inoremap '' ''<LEFT>
+inoremap <> <><LEFT>
