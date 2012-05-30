@@ -380,17 +380,12 @@ Bundle 'Shougo/neocomplcache'
 Bundle 'scrooloose/nerdtree'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'mattn/vimplenote-vim'
-"Bundle 'mrtazz/simplenote.vim'
-"Bundle 'mattn/vim-metarw'
 Bundle 'mattn/webapi-vim'
-"Bundle 'mattn/vim-metarw-simplenote'
+Bundle 'gerw/vim-latex-suite'
+
 filetype plugin indent on
 
 "simplenote
-"cnoremap <Leader>sn_email kojopy-mes@hotmail.co.jp
-"cnoremap <Leader>sn_pass kako1dse
-"let g:SimplenoteUsername = ""
-"let g:SimplenotePassword = "kako1dse"
 nnoremap :sn :<C-u>VimpleNote -n<CR>kojopy-mes@hotmail.co.jp<CR>bepjuoltqphkdbuk<CR>
 nnoremap :sl :<C-u>VimpleNote -l<CR>kojopy-mes@hotmail.co.jp<CR>bepjuoltqphkdbuk<CR>
 
@@ -405,3 +400,25 @@ inoremap <> <><LEFT>
 "tab settings
 set showtabline=2
 
+"Vim-LaTeX
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
+let g:Imap_UsePlaceHolders = 1
+let g:Imap_DeleteEmptyPlaceHolders = 1
+let g:Imap_StickyPlaceHolders = 0
+let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_FormatDependency_ps = 'dvi,ps'
+let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+let g:Tex_CompileRule_dvi = 'platex -kanji=utf8 -guess-input-enc -synctex=1 -interaction=nonstopmode $*'
+"let g:Tex_CompileRule_dvi = 'uplatex -kanji=utf8 -no-guess-input-enc -synctex=1 -interaction=nonstopmode $*'
+let g:Tex_CompileRule_ps = 'dvips -Ppdf -t a4 -o $*.ps $*.dvi'
+let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
+let g:Tex_BibtexFlavor = 'pbibtex -kanji=utf8'
+"let g:Tex_BibtexFlavor = 'upbibtex'
+let g:Tex_MakeIndexFlavor = 'mendex -U $*.idx'
+let g:Tex_ViewRule_dvi = 'C:/w32tex/dviout/dviout.exe -1'
+let g:Tex_ViewRule_ps = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance'
+"let g:Tex_ViewRule_ps = 'C:/Program Files/Ghostgum/gsview/gsview32.exe -e'
+"let g:Tex_ViewRule_pdf = 'C:/w32tex/share/texworks/TeXworks.exe'
+let g:Tex_ViewRule_pdf = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance -inverse-search "C:\vim73-kaoriya-win32\gvim.exe -n -c \":RemoteOpen +\%l \%f\""'
+"let g:Tex_ViewRule_pdf = 'C:/Program Files (x86)/Adobe\Reader 10.0/Reader/AcroRd32.exe'
