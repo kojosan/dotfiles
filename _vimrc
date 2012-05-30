@@ -401,3 +401,7 @@ inoremap () ()<LEFT>
 inoremap "" ""<LEFT>
 inoremap '' ''<LEFT>
 inoremap <> <><LEFT>
+
+"tab settings
+set showtabline=2
+
