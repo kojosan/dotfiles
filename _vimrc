@@ -364,27 +364,6 @@ augroup vimrc-auto-mkdir
     endfunction
 augroup END
 
-"vundle
-set nocompatible
-filetype off
-
-if has("win32") || has("win64")
-  set rtp+=~/vimfiles/vundle.git/ 
-  call vundle#rc("~/vimfiles/bundle/")
-else
-  set rtp+=~/.vim/vundle.git/ 
-  call vundle#rc()
-endif
-
-Bundle 'Shougo/neocomplcache'
-Bundle 'scrooloose/nerdtree'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'mattn/vimplenote-vim'
-Bundle 'mattn/webapi-vim'
-Bundle 'gerw/vim-latex-suite'
-
-filetype plugin indent on
-
 "simplenote
 nnoremap :sn :<C-u>VimpleNote -n<CR>kojopy-mes@hotmail.co.jp<CR>bepjuoltqphkdbuk<CR>
 nnoremap :sl :<C-u>VimpleNote -l<CR>kojopy-mes@hotmail.co.jp<CR>bepjuoltqphkdbuk<CR>
@@ -422,3 +401,25 @@ let g:Tex_ViewRule_ps = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse
 "let g:Tex_ViewRule_pdf = 'C:/w32tex/share/texworks/TeXworks.exe'
 let g:Tex_ViewRule_pdf = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance -inverse-search "C:\vim73-kaoriya-win32\gvim.exe -n -c \":RemoteOpen +\%l \%f\""'
 "let g:Tex_ViewRule_pdf = 'C:/Program Files (x86)/Adobe\Reader 10.0/Reader/AcroRd32.exe'
+
+""vundle
+set nocompatible
+filetype off
+
+if has("win32") || has("win64")
+  set rtp+=~/vimfiles/vundle.git/ 
+  call vundle#rc("~/vimfiles/bundle/")
+else
+  set rtp+=~/.vim/vundle.git/ 
+  call vundle#rc()
+endif
+
+Bundle 'Shougo/neocomplcache'
+Bundle 'scrooloose/nerdtree'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'mattn/vimplenote-vim'
+Bundle 'mattn/webapi-vim'
+Bundle 'gerw/vim-latex-suite'
+Bundle 'motemen/git-vim'
+
+filetype plugin indent on
