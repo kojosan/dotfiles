@@ -37,6 +37,7 @@ endif
 " set cmdheight=2
 
 " カラー設定:
+set background=dark
 colorscheme solarized
 
 " フォント設定
