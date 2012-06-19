@@ -421,5 +421,6 @@ Bundle 'mattn/vimplenote-vim'
 Bundle 'mattn/webapi-vim'
 Bundle 'gerw/vim-latex-suite'
 Bundle 'motemen/git-vim'
+Bundle 'mitechie/pyflakes-pathogen'
 
 filetype plugin indent on
