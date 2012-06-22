@@ -45,6 +45,7 @@ endif
 " scriptencodingと異なる内部エンコーディングに変更する場合、
 " 変更後にもscriptencodingを指定しておくと問題が起きにくくなります。
 " scriptencoding cp932
+set encoding=utf-8
 
 "----------------------------------------
 " システム設定
@@ -388,19 +389,35 @@ let g:Imap_StickyPlaceHolders = 0
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_FormatDependency_ps = 'dvi,ps'
 let g:Tex_FormatDependency_pdf = 'dvi,pdf'
-let g:Tex_CompileRule_dvi = 'platex -kanji=utf8 -guess-input-enc -synctex=1 -interaction=nonstopmode $*'
-"let g:Tex_CompileRule_dvi = 'uplatex -kanji=utf8 -no-guess-input-enc -synctex=1 -interaction=nonstopmode $*'
-let g:Tex_CompileRule_ps = 'dvips -Ppdf -t a4 -o $*.ps $*.dvi'
-let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
-let g:Tex_BibtexFlavor = 'pbibtex -kanji=utf8'
-"let g:Tex_BibtexFlavor = 'upbibtex'
-let g:Tex_MakeIndexFlavor = 'mendex -U $*.idx'
-let g:Tex_ViewRule_dvi = 'C:/w32tex/dviout/dviout.exe -1'
-let g:Tex_ViewRule_ps = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance'
-"let g:Tex_ViewRule_ps = 'C:/Program Files/Ghostgum/gsview/gsview32.exe -e'
-"let g:Tex_ViewRule_pdf = 'C:/w32tex/share/texworks/TeXworks.exe'
-let g:Tex_ViewRule_pdf = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance -inverse-search "C:\vim73-kaoriya-win32\gvim.exe -n -c \":RemoteOpen +\%l \%f\""'
-"let g:Tex_ViewRule_pdf = 'C:/Program Files (x86)/Adobe\Reader 10.0/Reader/AcroRd32.exe'
+if has("win32") || has("win64")
+"	let g:Tex_CompileRule_dvi = 'platex -kanji=utf8 -guess-input-enc -synctex=1 -interaction=nonstopmode $*'
+"	"let g:Tex_CompileRule_dvi = 'uplatex -kanji=utf8 -no-guess-input-enc -synctex=1 -interaction=nonstopmode $*'
+"	let g:Tex_CompileRule_ps = 'dvips -Ppdf -t a4 -o $*.ps $*.dvi'
+"	let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
+"	let g:Tex_BibtexFlavor = 'pbibtex -kanji=utf8'
+"	"let g:Tex_BibtexFlavor = 'upbibtex'
+"	let g:Tex_MakeIndexFlavor = 'mendex -U $*.idx'	
+"	let g:Tex_ViewRule_dvi = 'C:/w32tex/dviout/dviout.exe -1'
+"	let g:Tex_ViewRule_ps = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance'
+"	let g:Tex_ViewRule_pdf = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance -inverse-search "C:\vim73-kaoriya-win32\gvim.exe -n -c \":RemoteOpen +\%l \%f\""'
+elseif has("macunix")
+	let g:Tex_CompileRule_dvi = '/usr/texbin/platex -synctex=1 --interaction=nonstopmode $*'
+	"let g:Tex_CompileRule_dvi = '/usr/texbin/uplatex -synctex=1 -interaction=nonstopmode $*'
+	let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
+	let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx $*.dvi'
+	let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
+	"let g:Tex_BibtexFlavor = '/usr/texbin/upbibtex'
+	let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex $*.idx'
+	let g:Tex_UseEditorSettingInDVIViewer = 1
+	"let g:Tex_ViewRule_dvi = '/usr/texbin/pxdvi -watchfile 1 -editor "vim --servername vim-latex -n --remote-silent +\%l \%f"'
+	let g:Tex_ViewRule_dvi = '/usr/bin/open -a PictPrinter.app'
+	"let g:Tex_ViewRule_dvi = '/usr/bin/open -a Mxdvi.app'
+	let g:Tex_ViewRule_ps = '/usr/local/bin/gv --watch'
+	let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
+	"let g:Tex_ViewRule_pdf = '/usr/bin/open -a Skim.app'
+	"let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXShop.app'
+	"let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXworks.app'
+endif
 
 ""vundle
 set nocompatible
