@@ -342,15 +342,15 @@ endif
 " 一時設定
 "----------------------------------------
 
-"ファイルタイプ毎にプラグイン&インデント設定
+" ファイルタイプ毎にプラグイン&インデント設定
 filetype plugin indent on
 
-"Windows標準のクリップボードを使用
+" Use Windows Clipboard
 set clipboard=unnamed
 
 set shellxquote=
 
-"NERD Tree関連
+" NERDTree
 nmap <Leader>n :NERDTreeToggle<CR>
 
 " create directory automatically
@@ -365,11 +365,11 @@ augroup vimrc-auto-mkdir
     endfunction
 augroup END
 
-"simplenote
+" simplenote
 nnoremap :sn :<C-u>VimpleNote -n<CR>kojopy-mes@hotmail.co.jp<CR>bepjuoltqphkdbuk<CR>
 nnoremap :sl :<C-u>VimpleNote -l<CR>kojopy-mes@hotmail.co.jp<CR>bepjuoltqphkdbuk<CR>
 
-"keymap
+" keymap
 inoremap {} {}<LEFT>
 inoremap [] []<LEFT>
 inoremap () ()<LEFT>
@@ -377,10 +377,10 @@ inoremap "" ""<LEFT>
 inoremap '' ''<LEFT>
 inoremap <> <><LEFT>
 
-"tab settings
+" tab settings
 set showtabline=2
 
-"Vim-LaTeX
+" Vim-LaTeX
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 let g:Imap_UsePlaceHolders = 1
@@ -419,7 +419,14 @@ elseif has("macunix")
 	"let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXworks.app'
 endif
 
-""vundle
+" execute python scripts
+function! s:Exec()
+    exe "!" . &ft . " %"
+:endfunction
+command! Exec call <SID>Exec() 
+map <silent> <C-P> :call <SID>Exec()<CR>
+
+" vundle (must be at the end)
 set nocompatible
 filetype off
 
