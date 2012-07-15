@@ -1,8 +1,8 @@
 "=============================================================================
-"    Description: .vimrcサンプル設定
-"         Author: anonymous
+"  Description: .vimrcサンプル設定
+"     Author: anonymous
 "  Last Modified: 0000-00-00 07:03
-"        Version: 0.00
+"    Version: 0.00
 "=============================================================================
 set nocompatible
 scriptencoding cp932
@@ -22,11 +22,11 @@ scriptencoding cp932
 " $MY_VIMRUNTIMEはユーザーランタイムディレクトリを示す。
 " :echo $MY_VIMRUNTIMEで実際のパスを確認できます。
 if isdirectory($HOME . '/.vim')
-  let $MY_VIMRUNTIME = $HOME.'/.vim'
+    let $MY_VIMRUNTIME = $HOME.'/.vim'
 elseif isdirectory($HOME . '\vimfiles')
-  let $MY_VIMRUNTIME = $HOME.'\vimfiles'
+    let $MY_VIMRUNTIME = $HOME.'\vimfiles'
 elseif isdirectory($VIM . '\vimfiles')
-  let $MY_VIMRUNTIME = $VIM.'\vimfiles'
+    let $MY_VIMRUNTIME = $VIM.'\vimfiles'
 endif
 
 " ランタイムパスを通す必要のあるプラグインを使用する場合、
@@ -61,10 +61,10 @@ set nowritebackup
 " バックアップ/スワップファイルを作成する/しない
 set nobackup
 if version >= 703
-  " 再読込、vim終了後も継続するアンドゥ(7.3)
-  " set undofile
-  " アンドゥの保存場所(7.3)
-  " set undodir=.
+    " 再読込、vim終了後も継続するアンドゥ(7.3)
+    " set undofile
+    " アンドゥの保存場所(7.3)
+    " set undodir=.
 endif
 " set noswapfile
 " viminfoを作成しない
@@ -93,7 +93,7 @@ set ambiwidth=double
 set wildmenu
 " マウスを有効にする
 if has('mouse')
-  set mouse=a
+    set mouse=a
 endif
 " pluginを使用可能にする
 filetype plugin indent on
@@ -132,8 +132,8 @@ set visualbell t_vb=
 " 行番号表示
 set number
 if version >= 703
-  " 相対行番号表示(7.3)
-  " set relativenumber
+    " 相対行番号表示(7.3)
+    " set relativenumber
 endif
 " 括弧の対応表示時間
 set showmatch matchtime=1
@@ -158,7 +158,7 @@ set listchars=tab:^\ ,trail:~
 
 " ハイライトを有効にする
 if &t_Co > 2 || has('gui_running')
-  syntax on
+    syntax on
 endif
 " 色テーマ設定
 " gvimの色テーマは.gvimrcで指定する
@@ -169,24 +169,24 @@ endif
 " iconvが使用可能の場合、カーソル上の文字コードをエンコードに応じた表示にするFencB()を使用
 """"""""""""""""""""""""""""""
 if has('iconv')
-  set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=[0x%{FencB()}]\ (%v,%l)/%L%8P\ 
+    set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=[0x%{FencB()}]\ (%v,%l)/%L%8P\ 
 else
-  set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ (%v,%l)/%L%8P\ 
+    set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ (%v,%l)/%L%8P\ 
 endif
 
 " FencB() : カーソル上の文字コードをエンコードに応じた表示にする
 function! FencB()
-  let c = matchstr(getline('.'), '.', col('.') - 1)
-  let c = iconv(c, &enc, &fenc)
-  return s:Byte2hex(s:Str2byte(c))
+    let c = matchstr(getline('.'), '.', col('.') - 1)
+    let c = iconv(c, &enc, &fenc)
+    return s:Byte2hex(s:Str2byte(c))
 endfunction
 
 function! s:Str2byte(str)
-  return map(range(len(a:str)), 'char2nr(a:str[v:val])')
+    return map(range(len(a:str)), 'char2nr(a:str[v:val])')
 endfunction
 
 function! s:Byte2hex(bytes)
-  return join(map(copy(a:bytes), 'printf("%02X", v:val)'), '')
+    return join(map(copy(a:bytes), 'printf("%02X", v:val)'), '')
 endfunction
 
 "----------------------------------------
@@ -194,20 +194,20 @@ endfunction
 "----------------------------------------
 " diffの設定
 if has('win32') || has('win64')
-  set diffexpr=MyDiff()
-  function! MyDiff()
-    let opt = '-a --binary '
-    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-    let arg1 = v:fname_in
-    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-    let arg2 = v:fname_new
-    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-    let arg3 = v:fname_out
-    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-    let cmd = '!diff ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-    silent execute cmd
-  endfunction
+    set diffexpr=MyDiff()
+    function! MyDiff()
+        let opt = '-a --binary '
+        if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+        if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+        let arg1 = v:fname_in
+        if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+        let arg2 = v:fname_new
+        if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+        let arg3 = v:fname_out
+        if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+        let cmd = '!diff ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+        silent execute cmd
+    endfunction
 endif
 
 " 現バッファの差分表示(変更箇所の表示)
@@ -217,7 +217,7 @@ command! -nargs=? -complete=file Diff if '<args>'=='' | browse vertical diffspli
 " パッチコマンド
 set patchexpr=MyPatch()
 function! MyPatch()
-   call system($VIM."\\'.'patch -o " . v:fname_out . " " . v:fname_in . " < " . v:fname_diff)
+    call system($VIM."\\'.'patch -o " . v:fname_out . " " . v:fname_in . " < " . v:fname_diff)
 endfunction
 
 "----------------------------------------
@@ -259,8 +259,8 @@ nnoremap l <Right>zv
 " $VIMRUNTIME/vimrc_example.vim
 """"""""""""""""""""""""""""""
 augroup vimrcEx
-  autocmd!
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
+    autocmd!
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line('$') | exe "normal! g`\"" | endif
 augroup END
 
 """"""""""""""""""""""""""""""
@@ -269,11 +269,11 @@ augroup END
 let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none'
 
 if has('syntax')
-  augroup InsertHook
-    autocmd!
-    autocmd InsertEnter * call s:StatusLine('Enter')
-    autocmd InsertLeave * call s:StatusLine('Leave')
-  augroup END
+    augroup InsertHook
+        autocmd!
+        autocmd InsertEnter * call s:StatusLine('Enter')
+        autocmd InsertLeave * call s:StatusLine('Leave')
+    augroup END
 endif
 " if has('unix') && !has('gui_running')
 "   " ESCですぐに反映されない対策
@@ -282,23 +282,23 @@ endif
 
 let s:slhlcmd = ''
 function! s:StatusLine(mode)
-  if a:mode == 'Enter'
-    silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
-    silent exec g:hi_insert
-  else
-    highlight clear StatusLine
-    silent exec s:slhlcmd
-    redraw
-  endif
+    if a:mode == 'Enter'
+        silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
+        silent exec g:hi_insert
+    else
+        highlight clear StatusLine
+        silent exec s:slhlcmd
+        redraw
+    endif
 endfunction
 
 function! s:GetHighlight(hi)
-  redir => hl
-  exec 'highlight '.a:hi
-  redir END
-  let hl = substitute(hl, '[\r\n]', '', 'g')
-  let hl = substitute(hl, 'xxx', '', '')
-  return hl
+    redir => hl
+    exec 'highlight '.a:hi
+    redir END
+    let hl = substitute(hl, '[\r\n]', '', 'g')
+    let hl = substitute(hl, 'xxx', '', '')
+    return hl
 endfunction
 
 """"""""""""""""""""""""""""""
@@ -309,18 +309,18 @@ endfunction
 " 強調表示されない場合、ここでscriptencodingを指定するとうまくいく事があります。
 " scriptencoding cp932
 function! ZenkakuSpace()
-  silent! let hi = s:GetHighlight('ZenkakuSpace')
-  if hi =~ 'E411' || hi =~ 'cleared$'
-    highlight ZenkakuSpace cterm=underline ctermfg=darkgrey gui=underline guifg=darkgrey
-  endif
+    silent! let hi = s:GetHighlight('ZenkakuSpace')
+    if hi =~ 'E411' || hi =~ 'cleared$'
+        highlight ZenkakuSpace cterm=underline ctermfg=darkgrey gui=underline guifg=darkgrey
+    endif
 endfunction
 if has('syntax')
-  augroup ZenkakuSpace
-    autocmd!
-    autocmd ColorScheme       * call ZenkakuSpace()
-    autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
-  augroup END
-  call ZenkakuSpace()
+    augroup ZenkakuSpace
+        autocmd!
+        autocmd ColorScheme     * call ZenkakuSpace()
+        autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
+    augroup END
+    call ZenkakuSpace()
 endif
 
 """"""""""""""""""""""""""""""
@@ -342,16 +342,22 @@ endif
 " 一時設定
 "----------------------------------------
 
-" ファイルタイプ毎にプラグイン&インデント設定
-filetype plugin indent on
-
-" Use Windows Clipboard
-set clipboard=unnamed
-
 set shellxquote=
 
-" NERDTree
+" keymap
 nmap <Leader>n :NERDTreeToggle<CR>
+nmap <Leader>c <Plug>(caw:I:toggle)
+vmap <Leader>c <Plug>(caw:I:toggle)
+nmap + <Plug>(fontzoom-larger)
+nmap - <Plug>(fontzoom-smaller)
+nmap <C-ScrollWheelUp> <Plug>(fontzoom-larger)
+nmap <C-ScrollWheelDown> <Plug>(fontzoom-smaller)
+vmap + <Plug>(fontzoom-larger)
+vmap - <Plug>(fontzoom-smaller)
+vmap <C-ScrollWheelUp> <Plug>(fontzoom-larger)
+vmap <C-ScrollWheelDown> <Plug>(fontzoom-smaller)
+imap <C-ScrollWheelUp> <Plug>(fontzoom-larger)
+imap <C-ScrollWheelDown> <Plug>(fontzoom-smaller)
 
 " create directory automatically
 augroup vimrc-auto-mkdir
@@ -359,17 +365,17 @@ augroup vimrc-auto-mkdir
     autocmd BufWritePre * call s:auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
     function! s:auto_mkdir(dir, force)
         if !isdirectory(a:dir) && (a:force ||
-            \ input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
+                    \ input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
             call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
         endif
     endfunction
 augroup END
 
-" simplenote
-nnoremap :sn :<C-u>VimpleNote -n<CR>kojopy-mes@hotmail.co.jp<CR>bepjuoltqphkdbuk<CR>
-nnoremap :sl :<C-u>VimpleNote -l<CR>kojopy-mes@hotmail.co.jp<CR>bepjuoltqphkdbuk<CR>
+"" simplenote
+"nnoremap :sn :<C-u>VimpleNote -n<CR>kojopy-mes@hotmail.co.jp<CR>bepjuoltqphkdbuk<CR>
+"nnoremap :sl :<C-u>VimpleNote -l<CR>kojopy-mes@hotmail.co.jp<CR>bepjuoltqphkdbuk<CR>
 
-" keymap
+" 
 inoremap {} {}<LEFT>
 inoremap [] []<LEFT>
 inoremap () ()<LEFT>
@@ -377,8 +383,18 @@ inoremap "" ""<LEFT>
 inoremap '' ''<LEFT>
 inoremap <> <><LEFT>
 
+" 選択したテキストの移動
+vmap <C-j> <Plug>(Textmanip.move_selection_down)
+vmap <C-k> <Plug>(Textmanip.move_selection_up)
+vmap <C-h> <Plug>(Textmanip.move_selection_left)
+vmap <C-l> <Plug>(Textmanip.move_selection_right)
+
+" 行の複製
+vmap <M-d> <Plug>(Textmanip.duplicate_selection_v)
+nmap <M-d> <Plug>(Textmanip.duplicate_selection_n)
+
 " tab settings
-set showtabline=2
+"set showtabline=2
 
 " Vim-LaTeX
 set grepprg=grep\ -nH\ $*
@@ -389,62 +405,87 @@ let g:Imap_StickyPlaceHolders = 0
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_FormatDependency_ps = 'dvi,ps'
 let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+let g:Tex_AutoFolding = 0
 if has("win32") || has("win64")
-"	let g:Tex_CompileRule_dvi = 'platex -kanji=utf8 -guess-input-enc -synctex=1 -interaction=nonstopmode $*'
-"	"let g:Tex_CompileRule_dvi = 'uplatex -kanji=utf8 -no-guess-input-enc -synctex=1 -interaction=nonstopmode $*'
-"	let g:Tex_CompileRule_ps = 'dvips -Ppdf -t a4 -o $*.ps $*.dvi'
-"	let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
-"	let g:Tex_BibtexFlavor = 'pbibtex -kanji=utf8'
-"	"let g:Tex_BibtexFlavor = 'upbibtex'
-"	let g:Tex_MakeIndexFlavor = 'mendex -U $*.idx'	
-"	let g:Tex_ViewRule_dvi = 'C:/w32tex/dviout/dviout.exe -1'
-"	let g:Tex_ViewRule_ps = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance'
-"	let g:Tex_ViewRule_pdf = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance -inverse-search "C:\vim73-kaoriya-win32\gvim.exe -n -c \":RemoteOpen +\%l \%f\""'
+    let g:Tex_CompileRule_dvi = 'platex -kanji=utf8 -guess-input-enc -synctex=1 -interaction=nonstopmode $*'
+    "let g:Tex_CompileRule_dvi = 'uplatex -kanji=utf8 -no-guess-input-enc -synctex=1 -interaction=nonstopmode $*'
+    let g:Tex_CompileRule_ps = 'dvips -Ppdf -t a4 -o $*.ps $*.dvi'
+    let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
+    let g:Tex_BibtexFlavor = 'pbibtex -kanji=utf8'
+    "let g:Tex_BibtexFlavor = 'upbibtex'
+    let g:Tex_MakeIndexFlavor = 'mendex -U $*.idx'  
+    let g:Tex_ViewRule_dvi = 'C:/w32tex/dviout/dviout.exe -1'
+    let g:Tex_ViewRule_ps = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance'
+    let g:Tex_ViewRule_pdf = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance -inverse-search "C:\vim73-kaoriya-win32\gvim.exe -n -c \":RemoteOpen +\%l \%f\""'
 elseif has("macunix")
-	let g:Tex_CompileRule_dvi = '/usr/texbin/platex -synctex=1 --interaction=nonstopmode $*'
-	"let g:Tex_CompileRule_dvi = '/usr/texbin/uplatex -synctex=1 -interaction=nonstopmode $*'
-	let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
-	let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx $*.dvi'
-	let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
-	"let g:Tex_BibtexFlavor = '/usr/texbin/upbibtex'
-	let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex $*.idx'
-	let g:Tex_UseEditorSettingInDVIViewer = 1
-	"let g:Tex_ViewRule_dvi = '/usr/texbin/pxdvi -watchfile 1 -editor "vim --servername vim-latex -n --remote-silent +\%l \%f"'
-	let g:Tex_ViewRule_dvi = '/usr/bin/open -a PictPrinter.app'
-	"let g:Tex_ViewRule_dvi = '/usr/bin/open -a Mxdvi.app'
-	let g:Tex_ViewRule_ps = '/usr/local/bin/gv --watch'
-	let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
-	"let g:Tex_ViewRule_pdf = '/usr/bin/open -a Skim.app'
-	"let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXShop.app'
-	"let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXworks.app'
+    let g:Tex_CompileRule_dvi = '/usr/texbin/platex -synctex=1 --interaction=nonstopmode $*'
+    "let g:Tex_CompileRule_dvi = '/usr/texbin/uplatex -synctex=1 -interaction=nonstopmode $*'
+    let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
+    let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx $*.dvi'
+    let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
+    "let g:Tex_BibtexFlavor = '/usr/texbin/upbibtex'
+    let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex $*.idx'
+    let g:Tex_UseEditorSettingInDVIViewer = 1
+    "let g:Tex_ViewRule_dvi = '/usr/texbin/pxdvi -watchfile 1 -editor "vim --servername vim-latex -n --remote-silent +\%l \%f"'
+    let g:Tex_ViewRule_dvi = '/usr/bin/open -a PictPrinter.app'
+    "let g:Tex_ViewRule_dvi = '/usr/bin/open -a Mxdvi.app'
+    let g:Tex_ViewRule_ps = '/usr/local/bin/gv --watch'
+    let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
+    "let g:Tex_ViewRule_pdf = '/usr/bin/open -a Skim.app'
+    "let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXShop.app'
+    "let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXworks.app'
 endif
+autocmd FileType tex setl tabstop=4 shiftwidth=4 softtabstop=4
 
-" execute python scripts
+" neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+
+" indent-guides
+let g:indent_guides_guide_size=4
+
+" python settings
+"autocmd FileType python setl autoindent
+autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+autocmd FileType python setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
+
+" python script execution
 function! s:Exec()
     exe "!" . &ft . " %"
-:endfunction
-command! Exec call <SID>Exec() 
-map <silent> <C-P> :call <SID>Exec()<CR>
+    :endfunction
+    command! Exec call <SID>Exec() 
+    map <silent> <C-P> :call <SID>Exec()<CR>
 
-" vundle (must be at the end)
-set nocompatible
-filetype off
+    " python completion
+    autocmd FileType python set omnifunc=pythoncomplete#Complete
+    "autocmd FileType python set omnifunc=pysmell#Complete
 
-if has("win32") || has("win64")
-  set rtp+=~/vimfiles/vundle.git/ 
-  call vundle#rc("~/vimfiles/bundle/")
-else
-  set rtp+=~/.vim/vundle.git/ 
-  call vundle#rc()
-endif
+    " vundle (must be at the end)
+    set nocompatible
+    filetype off
 
-Bundle 'Shougo/neocomplcache'
-Bundle 'scrooloose/nerdtree'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'mattn/vimplenote-vim'
-Bundle 'mattn/webapi-vim'
-Bundle 'gerw/vim-latex-suite'
-Bundle 'motemen/git-vim'
-Bundle 'mitechie/pyflakes-pathogen'
+    if has("win32") || has("win64")
+        set rtp+=~/vimfiles/vundle.git/ 
+        call vundle#rc("~/vimfiles/bundle/")
+    else
+        set rtp+=~/.vim/vundle.git/ 
+        call vundle#rc()
+    endif
 
-filetype plugin indent on
+    Bundle 'scrooloose/nerdtree'
+    Bundle 'altercation/vim-colors-solarized'
+    Bundle 'mattn/vimplenote-vim'
+    Bundle 'mattn/webapi-vim'
+    Bundle 'gerw/vim-latex-suite'
+    Bundle 'motemen/git-vim'
+    Bundle 'mitechie/pyflakes-pathogen'
+    Bundle 'Shougo/neocomplcache'
+    Bundle 'vim-scripts/pythoncomplete'
+    Bundle 'tyru/caw.vim'
+    Bundle 'Rip-Rip/clang_complete'
+    Bundle 'thinca/vim-quickrun'
+    Bundle 'osyo-manga/neocomplcache-clang_complete'
+    Bundle 'thinca/vim-fontzoom'
+    Bundle 'nathanaelkane/vim-indent-guides'
+    Bundle 't9md/vim-textmanip'
+
+    filetype plugin indent on
