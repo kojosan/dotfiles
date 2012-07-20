@@ -452,40 +452,43 @@ autocmd FileType python setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
 function! s:Exec()
     exe "!" . &ft . " %"
     :endfunction
-    command! Exec call <SID>Exec() 
-    map <silent> <C-P> :call <SID>Exec()<CR>
+command! Exec call <SID>Exec() 
+map <silent> <C-P> :call <SID>Exec()<CR>
 
-    " python completion
-    autocmd FileType python set omnifunc=pythoncomplete#Complete
-    "autocmd FileType python set omnifunc=pysmell#Complete
+nmap <F5> :!python %<CR>
+nmap <F12> :!python -m pdb %<CR>
 
-    " vundle (must be at the end)
-    set nocompatible
-    filetype off
+" python completion
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType python set omnifunc=pysmell#Complete
 
-    if has("win32") || has("win64")
-        set rtp+=~/vimfiles/vundle.git/ 
-        call vundle#rc("~/vimfiles/bundle/")
-    else
-        set rtp+=~/.vim/vundle.git/ 
-        call vundle#rc()
-    endif
+" vundle (must be at the end)
+set nocompatible
+filetype off
 
-    Bundle 'scrooloose/nerdtree'
-    Bundle 'altercation/vim-colors-solarized'
-    Bundle 'mattn/vimplenote-vim'
-    Bundle 'mattn/webapi-vim'
-    Bundle 'gerw/vim-latex-suite'
-    Bundle 'motemen/git-vim'
-    Bundle 'mitechie/pyflakes-pathogen'
-    Bundle 'Shougo/neocomplcache'
-    Bundle 'vim-scripts/pythoncomplete'
-    Bundle 'tyru/caw.vim'
-    Bundle 'Rip-Rip/clang_complete'
-    Bundle 'thinca/vim-quickrun'
-    Bundle 'osyo-manga/neocomplcache-clang_complete'
-    Bundle 'thinca/vim-fontzoom'
-    Bundle 'nathanaelkane/vim-indent-guides'
-    Bundle 't9md/vim-textmanip'
+if has("win32") || has("win64")
+set rtp+=~/vimfiles/vundle.git/ 
+call vundle#rc("~/vimfiles/bundle/")
+else
+set rtp+=~/.vim/vundle.git/ 
+call vundle#rc()
+endif
 
-    filetype plugin indent on
+Bundle 'scrooloose/nerdtree'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'mattn/vimplenote-vim'
+Bundle 'mattn/webapi-vim'
+Bundle 'gerw/vim-latex-suite'
+Bundle 'motemen/git-vim'
+Bundle 'mitechie/pyflakes-pathogen'
+Bundle 'Shougo/neocomplcache'
+Bundle 'vim-scripts/pythoncomplete'
+Bundle 'tyru/caw.vim'
+Bundle 'Rip-Rip/clang_complete'
+Bundle 'thinca/vim-quickrun'
+Bundle 'osyo-manga/neocomplcache-clang_complete'
+Bundle 'thinca/vim-fontzoom'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 't9md/vim-textmanip'
+
+filetype plugin indent on
