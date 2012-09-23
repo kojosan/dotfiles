@@ -359,6 +359,11 @@ vmap <C-ScrollWheelDown> <Plug>(fontzoom-smaller)
 imap <C-ScrollWheelUp> <Plug>(fontzoom-larger)
 imap <C-ScrollWheelDown> <Plug>(fontzoom-smaller)
 
+"for mac-uskbd
+if has("macunix") || has('mac') || has('darwin') || has('unix')
+    noremap ; :
+endif
+
 " create directory automatically
 augroup vimrc-auto-mkdir
     autocmd!
@@ -418,10 +423,10 @@ if has("win32") || has("win64")
     let g:Tex_ViewRule_ps = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance'
     let g:Tex_ViewRule_pdf = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance -inverse-search "C:\vim73-kaoriya-win32\gvim.exe -n -c \":RemoteOpen +\%l \%f\""'
 elseif has("macunix")
-    let g:Tex_CompileRule_dvi = '/usr/texbin/platex -synctex=1 --interaction=nonstopmode $*'
+    let g:Tex_CompileRule_dvi = '/usr/texbin/platex -kanji=utf8 -guess-input-enc -synctex=1 --interaction=nonstopmode $*'
     "let g:Tex_CompileRule_dvi = '/usr/texbin/uplatex -synctex=1 -interaction=nonstopmode $*'
-    let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
-    let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx $*.dvi'
+    let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -t a4 -o $*.ps $*.dvi'
+    let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx -p a4 $*.dvi'
     let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
     "let g:Tex_BibtexFlavor = '/usr/texbin/upbibtex'
     let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex $*.idx'
@@ -490,5 +495,6 @@ Bundle 'osyo-manga/neocomplcache-clang_complete'
 Bundle 'thinca/vim-fontzoom'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 't9md/vim-textmanip'
+Bundle 'scrooloose/syntastic'
 
 filetype plugin indent on
