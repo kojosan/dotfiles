@@ -41,10 +41,11 @@ endif
 " オールインワンパッケージの場合 vimrcで設定されます。
 " エンコーディング指定や文字コードの自動認識設定が適切に設定されている場合、
 " 次行の encode.vim読込部分はコメントアウトして下さい。
-" silent! source $MY_VIMRUNTIME/pluginjp/encode.vim
+silent! source $MY_VIMRUNTIME/pluginjp/encode.vim
 " scriptencodingと異なる内部エンコーディングに変更する場合、
 " 変更後にもscriptencodingを指定しておくと問題が起きにくくなります。
-" set encoding=utf-8
+set encoding=utf-8
+set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
 
 "----------------------------------------
 " システム設定
@@ -348,16 +349,6 @@ set shellxquote=
 nmap <Leader>n :NERDTreeToggle<CR>
 nmap <Leader>c <Plug>(caw:I:toggle)
 vmap <Leader>c <Plug>(caw:I:toggle)
-" nmap + <Plug>(fontzoom-larger)
-" nmap - <Plug>(fontzoom-smaller)
-" nmap <C-ScrollWheelUp> <Plug>(fontzoom-larger)
-" nmap <C-ScrollWheelDown> <Plug>(fontzoom-smaller)
-" vmap + <Plug>(fontzoom-larger)
-" vmap - <Plug>(fontzoom-smaller)
-" vmap <C-ScrollWheelUp> <Plug>(fontzoom-larger)
-" vmap <C-ScrollWheelDown> <Plug>(fontzoom-smaller)
-" imap <C-ScrollWheelUp> <Plug>(fontzoom-larger)
-" imap <C-ScrollWheelDown> <Plug>(fontzoom-smaller)
 
 "for mac-uskbd
 if has("macunix") || has('mac') || has('darwin') || has('unix')
@@ -401,6 +392,16 @@ nmap <M-d> <Plug>(Textmanip.duplicate_selection_n)
 " tab settings
 "set showtabline=2
 
+
+" neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+
+" indent-guides
+let g:indent_guides_guide_size=4
+
+
+"---Tex settings---
+autocmd FileType tex setl tabstop=4 shiftwidth=4 softtabstop=4
 " Vim-LaTeX
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
@@ -440,16 +441,13 @@ elseif has("macunix")
     "let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXShop.app'
     "let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXworks.app'
 endif
-autocmd FileType tex setl tabstop=4 shiftwidth=4 softtabstop=4
 
-" neocomplcache
-let g:neocomplcache_enable_at_startup = 1
 
-" indent-guides
-let g:indent_guides_guide_size=4
+"---C/C++ settings---
+autocmd FileType c,cpp,cs setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 nowrap
 
-" python settings
-"autocmd FileType python setl autoindent
+
+"---Python settings---
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd FileType python setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
@@ -467,7 +465,8 @@ nmap <F12> :!python -m pdb %<CR>
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 "autocmd FileType python set omnifunc=pysmell#Complete
 
-" vundle (must be at the end)
+
+"---vundle settings (must be at the end)---
 set nocompatible
 filetype off
 
@@ -492,9 +491,9 @@ Bundle 'tyru/caw.vim'
 Bundle 'Rip-Rip/clang_complete'
 Bundle 'thinca/vim-quickrun'
 Bundle 'osyo-manga/neocomplcache-clang_complete'
-Bundle 'thinca/vim-fontzoom'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 't9md/vim-textmanip'
 Bundle 'scrooloose/syntastic'
+Bundle 'taku-o/vim-zoom'
 
 filetype plugin indent on
