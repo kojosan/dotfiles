@@ -136,13 +136,6 @@ set list
 set listchars=tab:^\ ,trail:~
 " ルーラー（右下に表示される行・列の番号）を表示する
 set ruler
-" ハイライトを有効にする
-if &t_Co > 2 || has('gui_running')
-    syntax on
-endif
-" 色テーマ設定
-" gvimの色テーマは.gvimrcで指定する
-" colorscheme ap_dark8
 
 """"""""""""""""""""""""""""""
 " ステータスラインに文字コード等表示
@@ -477,3 +470,8 @@ Bundle 'scrooloose/syntastic'
 Bundle 'taku-o/vim-zoom'
 
 filetype plugin indent on
+
+" カラースキーマ設定
+syntax enable
+set background=dark
+colorscheme solarized
