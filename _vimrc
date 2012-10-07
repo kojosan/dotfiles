@@ -1,19 +1,10 @@
 "=============================================================================
 "  Description: .vimrc
-"     Author: anonymous
-"  Last Modified: 0000-00-00 07:03
-"    Version: 0.00
+"  Author: kojo
+"  Version: 0.00
 "=============================================================================
 set nocompatible
 scriptencoding utf-8
-" scriptencodingと、このファイルのエンコーディングが一致するよう注意！
-" scriptencodingは、vimの内部エンコーディングと同じものを推奨します。
-" 改行コードは set fileformat=unix に設定するとunixでも使えます。
-
-" Windowsで内部エンコーディングを cp932以外にしていて、
-" 環境変数に日本語を含む値を設定したい場合は Let を使用します。
-" Letは vimrc(オールインワンパッケージの場合)と encode.vim で定義されます。
-" Let $HOGE=$USERPROFILE.'/ほげ'
 
 "----------------------------------------
 " ユーザーランタイムパス設定
@@ -29,31 +20,19 @@ elseif isdirectory($VIM . '\vimfiles')
     let $MY_VIMRUNTIME = $VIM.'\vimfiles'
 endif
 
-" ランタイムパスを通す必要のあるプラグインを使用する場合、
-" $MY_VIMRUNTIMEを使用すると Windows/Linuxで切り分ける必要が無くなります。
-" 例) vimfiles/qfixapp (Linuxでは~/.vim/qfixapp)にランタイムパスを通す場合
-" set runtimepath+=$MY_VIMRUNTIME/qfixapp
-
 "----------------------------------------
-" 内部エンコーディング指定
+" エンコーディング指定
 "----------------------------------------
-" 内部エンコーディングのUTF-8化と文字コードの自動認識設定をencode.vimで行う。
-" オールインワンパッケージの場合 vimrcで設定されます。
-" エンコーディング指定や文字コードの自動認識設定が適切に設定されている場合、
-" 次行の encode.vim読込部分はコメントアウトして下さい。
-silent! source $MY_VIMRUNTIME/pluginjp/encode.vim
-" scriptencodingと異なる内部エンコーディングに変更する場合、
-" 変更後にもscriptencodingを指定しておくと問題が起きにくくなります。
+" vimの内部エンコーディング指定
 set encoding=utf-8
+" 既存ファイルを開くためのエンコーディング指定（先頭ほど優先順位高）
 set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
+" 新規ファイルのエンコーディング指定
+set fileencoding=utf-8
 
 "----------------------------------------
 " システム設定
 "----------------------------------------
-" mswin.vimを読み込む
-" source $VIMRUNTIME/mswin.vim
-" behave mswin
-
 " ファイルの上書きの前にバックアップを作る/作らない
 " set writebackupを指定してもオプション 'backup' がオンでない限り、
 " バックアップは上書きに成功した後に削除される。
@@ -70,7 +49,7 @@ endif
 " viminfoを作成しない
 " set viminfo=
 " クリップボードを共有
-set clipboard+=unnamed
+set clipboard=unnamed,autoselect
 " 8進数を無効にする。<C-a>,<C-x>に影響する
 set nrformats-=octal
 " キーコードやマッピングされたキー列が完了するのを待つ時間(ミリ秒)
@@ -450,6 +429,7 @@ autocmd FileType c,cpp,cs setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 no
 "---Python settings---
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd FileType python setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd BufNewFile *.py 0r $HOME/.vim/template/python.txt
 
 " python script execution
 function! s:Exec()
