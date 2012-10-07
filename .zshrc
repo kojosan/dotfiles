@@ -233,10 +233,11 @@ update_title() {
 # プロンプト
 autoload colors
 colors
-PROMPT="%{${fg[blue]}%}[%n@%m] %(!.#.$) %{${reset_color}%}"
+PROMPT="
+%{${fg[blue]}%}[%n@%m] %(!.#.$) %{${reset_color}%}"
 PROMPT2="%{${fg[blue]}%}%_> %{${reset_color}%}"
 SPROMPT="%{${fg[red]}%}correct: %R -> %r [nyae]? %{${reset_color}%}"
-#RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
+RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
 
 # PATH
 PATH=~/local/bin:/opt/local/bin:$PATH
