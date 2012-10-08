@@ -337,4 +337,4 @@ SPROMPT="%{${fg[red]}%}correct: %R -> %r [nyae]? %{${reset_color}%}"
 RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
 
 # PATH
-PATH=~/local/bin:/opt/local/bin:$PATH
+PATH=~/bin:/opt/local/bin:$PATH
