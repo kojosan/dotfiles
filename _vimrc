@@ -437,6 +437,8 @@ nmap <F12> :!python -m pdb %<CR>
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 "autocmd FileType python set omnifunc=pysmell#Complete
 
+"---shell script settings---
+autocmd BufNewFile *.sh 0r $VIMFILES/templates/template.sh
 
 "---vundle settings (must be at the end)---
 set nocompatible
