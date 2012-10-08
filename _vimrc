@@ -7,17 +7,14 @@ set nocompatible
 scriptencoding utf-8
 
 "----------------------------------------
-" ユーザーランタイムパス設定
+" vimfilesのpath
 "----------------------------------------
-" Windows, unixでのruntimepathの違いを吸収するためのもの。
-" $MY_VIMRUNTIMEはユーザーランタイムディレクトリを示す。
-" :echo $MY_VIMRUNTIMEで実際のパスを確認できます。
-if isdirectory($HOME . '/.vim')
-    let $MY_VIMRUNTIME = $HOME.'/.vim'
-elseif isdirectory($HOME . '\vimfiles')
-    let $MY_VIMRUNTIME = $HOME.'\vimfiles'
-elseif isdirectory($VIM . '\vimfiles')
-    let $MY_VIMRUNTIME = $VIM.'\vimfiles'
+if isdirectory($HOME.'/.vim')
+    let $VIMFILES = $HOME.'/.vim'
+elseif isdirectory($HOME.'\vimfiles')
+    let $VIMFILES = $HOME.'\vimfiles'
+elseif isdirectory($VIM.'\vimfiles')
+    let $VIMFILES = $VIM.'\vimfiles'
 endif
 
 "----------------------------------------
@@ -417,12 +414,12 @@ endif
 
 "---C/C++ settings---
 autocmd FileType c,cpp,cs setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 nowrap
-
+autocmd BufNewFile Makefile 0r $VIMFILES/templates/Makefile
 
 "---Python settings---
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd FileType python setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
-autocmd BufNewFile *.py 0r $HOME/.vim/template/python.txt
+autocmd BufNewFile *.py 0r $VIMFILES/templates/template.py
 
 " python script execution
 function! s:Exec()
