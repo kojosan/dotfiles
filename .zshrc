@@ -338,3 +338,5 @@ RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
 
 # PATH
 PATH=~/bin:/opt/local/bin:$PATH
+PYTHONPATH=~/lib/python:$PYTHONPATH
+export PYTHONPATH
