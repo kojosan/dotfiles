@@ -8,11 +8,13 @@ TARGET = a
 
 CPPFLAGS = -O3 -std=c++0x
 LDFLAGS = 
+# ARFLAGS = crsv
 
-INSTALLDIR = ~/local/bin/
+INSTALLDIR = ~/lib/
+HEDDESTDIR = ~/include/
 
-INCS = -I/opt/local/include -I$(HOME)/local/include
-LIBS = -L/opt/local/lib -L$(HOME)/local/lib
+INCS = -I/opt/local/include -I$(HOME)/include
+LIBS = -L/opt/local/lib -L$(HOME)/lib
 
 #------------------------------------------------------
 # Definition
@@ -33,12 +35,13 @@ ifeq ($(OBJDIR),)
 endif
 
 SRCS = $(foreach d,$(SRCDIRS),$(wildcard $(addprefix $(d)/*,$(SRCEXTS))))
-HEDS = $(foreach d,$(SRCDIRS),$(wildcard $(addprefix $(d)/*,$(HDREXTS))))
+HEDS = $(foreach d,$(SRCDIRS),$(wildcard $(addprefix $(d)/*,$(HEDEXTS))))
 OBJS = $(addprefix $(OBJDIR)/,$(addsuffix .o,$(notdir $(basename $(SRCS)))))
 DEPS = $(OBJS:.o=.d)
 
 COMPILE.cpp = $(CXX) $(CPPFLAGS) $(INCS) -c
 LINK.cpp    = $(CXX) $(CPPFLAGS) $(LDFLAGS)
+# ARCHIVE.cpp = $(AR) $(ARFLAGS)
 
 .SUFFIXES:
 
@@ -50,6 +53,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	$(LINK.cpp) $< $(LIBS) -o $@
+# 	$(ARCHIVE.cpp) $@ $<
 
 $(OBJS): $(SRCS) | _objdir
 	$(COMPILE.cpp) $< -o $@
@@ -59,6 +63,7 @@ _objdir:
 
 install: $(TARGET)
 	cp $< $(INSTALLDIR)
+# 	cp $(HEDS) $(HEDDESTDIR)
 
 dep:
 	$(CXX) -MM -MG $(SRCS) >makefile.depend
@@ -71,5 +76,6 @@ tar:
 
 #--------------------------------------------------
 -include makefile.depend
+
 
 

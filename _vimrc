@@ -420,6 +420,8 @@ autocmd BufNewFile Makefile 0r $VIMFILES/templates/Makefile
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd FileType python setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd BufNewFile *.py 0r $VIMFILES/templates/template.py
+autocmd BufNewFile setup.py 0r $VIMFILES/templates/setup.py
+autocmd BufNewFile __init__.py 0r $VIMFILES/templates/__init__.py
 
 " python script execution
 function! s:Exec()
