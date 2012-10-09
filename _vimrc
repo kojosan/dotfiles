@@ -415,6 +415,7 @@ endif
 "---C/C++ settings---
 autocmd FileType c,cpp,cs setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 nowrap
 autocmd BufNewFile *.cpp 0r $VIMFILES/templates/template.cpp
+autocmd FileType c,cpp set path+=/opt/local/include,~/include
 
 "---Python settings---
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
@@ -463,6 +464,8 @@ NeoBundle 't9md/vim-textmanip'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'taku-o/vim-zoom'
 NeoBundle 'tpope/vim-surround'
+NeoBundle "jceb/vim-hier"
+NeoBundle 'vim-scripts/gtags.vim'
 
 filetype plugin indent on
 
