@@ -438,35 +438,31 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 "---shell script settings---
 autocmd BufNewFile *.sh 0r $VIMFILES/templates/template.sh
 
-"---vundle settings (must be at the end)---
+"---neobundle settings (must be at the end)---
 set nocompatible
 filetype off
 
-if has("win32") || has("win64")
-set rtp+=~/vimfiles/vundle.git/ 
-call vundle#rc("~/vimfiles/bundle/")
-else
-set rtp+=~/.vim/vundle.git/ 
-call vundle#rc()
-endif
+set rtp+=$VIMFILES/neobundle.vim
+call neobundle#rc()
 
-Bundle 'scrooloose/nerdtree'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'mattn/vimplenote-vim'
-Bundle 'mattn/webapi-vim'
-Bundle 'gerw/vim-latex-suite'
-Bundle 'motemen/git-vim'
-Bundle 'mitechie/pyflakes-pathogen'
-Bundle 'Shougo/neocomplcache'
-Bundle 'vim-scripts/pythoncomplete'
-Bundle 'tyru/caw.vim'
-Bundle 'Rip-Rip/clang_complete'
-Bundle 'thinca/vim-quickrun'
-Bundle 'osyo-manga/neocomplcache-clang_complete'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 't9md/vim-textmanip'
-Bundle 'scrooloose/syntastic'
-Bundle 'taku-o/vim-zoom'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'mattn/vimplenote-vim'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'gerw/vim-latex-suite'
+NeoBundle 'motemen/git-vim'
+NeoBundle 'mitechie/pyflakes-pathogen'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'vim-scripts/pythoncomplete'
+NeoBundle 'tyru/caw.vim'
+NeoBundle 'Rip-Rip/clang_complete'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'osyo-manga/neocomplcache-clang_complete'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 't9md/vim-textmanip'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'taku-o/vim-zoom'
+NeoBundle 'tpope/vim-surround'
 
 filetype plugin indent on
 
