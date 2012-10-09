@@ -414,6 +414,7 @@ endif
 
 "---C/C++ settings---
 autocmd FileType c,cpp,cs setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 nowrap
+autocmd BufNewFile *.cpp 0r $VIMFILES/templates/template.cpp
 
 "---Python settings---
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
