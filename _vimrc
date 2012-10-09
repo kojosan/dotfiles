@@ -439,6 +439,13 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 "---shell script settings---
 autocmd BufNewFile *.sh 0r $VIMFILES/templates/template.sh
 
+"---gtags settings---
+map <C-j> :GtagsCursor<CR>
+map <C-i> :Gtags -f %<CR>
+map <C-g> :Gtags
+map <C-n> :cn<CR>
+map <C-p> :cp<CR>
+
 "---neobundle settings (must be at the end)---
 set nocompatible
 filetype off
