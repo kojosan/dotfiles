@@ -1,9 +1,4 @@
 ### ~/.zshrc
-# PATH
-export PATH=~/bin:/opt/local/bin:$PATH
-export MANPATH=~/man:/opt/local/man:$MANPATH
-export PYTHONPATH=~/lib/python:$PYTHONPATH
-
 # Vi風キーバインド
 bindkey -v
 
@@ -164,6 +159,7 @@ alias link=glink
 alias ln=gln
 alias logname=glogname
 alias ls='gls -F'
+alias make=gmake
 alias md5sum=gmd5sum
 alias mkdir=gmkdir
 alias mkfifo=gmkfifo
