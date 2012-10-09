@@ -440,11 +440,14 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd BufNewFile *.sh 0r $VIMFILES/templates/template.sh
 
 "---gtags settings---
-map <C-j> :GtagsCursor<CR>
-map <C-i> :Gtags -f %<CR>
-map <C-g> :Gtags
-map <C-n> :cn<CR>
-map <C-p> :cp<CR>
+nmap <C-c> :GtagsCursor<CR>
+nmap <C-q> <C-w><C-w><C-w>q
+nmap <C-g> :Gtags -g 
+nmap <C-l> :Gtags -f %<CR>
+nmap <C-j> :Gtags <C-r><C-w><CR>
+nmap <C-k> :Gtags -r <C-r><C-w><CR>
+nmap <C-n> :cn<CR>
+nmap <C-p> :cp<CR>
 
 "---neobundle settings (must be at the end)---
 set nocompatible
