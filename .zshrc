@@ -53,7 +53,7 @@ zstyle ':completion:*:default' menu select=2
 
 ## 補完候補に色を付ける。
 ### "": 空文字列はデフォルト値を使うという意味。
-zstyle ':completion:*:default' list-colors ""
+zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 
 ## 補完候補がなければより曖昧に候補を探す。
 ### m:{a-z}={A-Z}: 小文字を大文字に変えたものでも補完する。
@@ -119,6 +119,10 @@ fi
     print -n -P " %n@%m:%~\a"
 }
 
+# ls表示のカラー設定
+export LSCOLORS=exfxcxdxbxegedabagacad
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+
 # GNU coreutils 用エイリアス
 alias base64=gbase64
 alias basename=gbasename
@@ -158,7 +162,7 @@ alias kill=gkill
 alias link=glink
 alias ln=gln
 alias logname=glogname
-alias ls='gls -F'
+alias ls='gls -F --color'
 alias make=gmake
 alias md5sum=gmd5sum
 alias mkdir=gmkdir
@@ -216,6 +220,8 @@ alias wc=gwc
 alias who=gwho
 alias whoami=gwhoami
 alias yes=gyeson
+
+alias tmux="TERM=xterm-256color tmux"
 
 # プロンプト
 autoload colors
