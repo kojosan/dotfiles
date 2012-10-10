@@ -23,7 +23,7 @@ endif
 " vimの内部エンコーディング指定
 set encoding=utf-8
 " 既存ファイルを開くためのエンコーディング指定（先頭ほど優先順位高）
-set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
+set fileencodings=utf-8,cp932,sjis,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213
 " 新規ファイルのエンコーディング指定
 set fileencoding=utf-8
 
@@ -133,6 +133,8 @@ set list
 set listchars=tab:^\ ,trail:~
 " ルーラー（右下に表示される行・列の番号）を表示する
 set ruler
+" シェルに渡すコマンドを囲む引用符
+set shellxquote=
 
 """"""""""""""""""""""""""""""
 " ステータスラインに文字コード等表示
@@ -224,6 +226,8 @@ nnoremap l <Right>zv
 "----------------------------------------
 " Vimスクリプト
 "----------------------------------------
+
+
 """"""""""""""""""""""""""""""
 " ファイルを開いたら前回のカーソル位置へ移動
 " $VIMRUNTIME/vimrc_example.vim
@@ -304,27 +308,16 @@ endif
 "   au BufEnter * execute ":silent! lcd " . escape(expand("%:p:h"), ' ')
 " endif
 
-"----------------------------------------
-" 各種プラグイン設定
-"----------------------------------------
-
-"----------------------------------------
-" 一時設定
-"----------------------------------------
-
-set shellxquote=
-
-" keymap
-nmap <Leader>n :NERDTreeToggle<CR>
-nmap <Leader>c <Plug>(caw:I:toggle)
-vmap <Leader>c <Plug>(caw:I:toggle)
-
+""""""""""""""""""""""""""""""
 "for mac-uskbd
+""""""""""""""""""""""""""""""
 if has("macunix") || has('mac') || has('darwin') || has('unix')
     noremap ; :
 endif
 
+""""""""""""""""""""""""""""""
 " create directory automatically
+""""""""""""""""""""""""""""""
 augroup vimrc-auto-mkdir
     autocmd!
     autocmd BufWritePre * call s:auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
@@ -336,11 +329,9 @@ augroup vimrc-auto-mkdir
     endfunction
 augroup END
 
-"" simplenote
-"nnoremap :sn :<C-u>VimpleNote -n<CR>kojopy-mes@hotmail.co.jp<CR>bepjuoltqphkdbuk<CR>
-"nnoremap :sl :<C-u>VimpleNote -l<CR>kojopy-mes@hotmail.co.jp<CR>bepjuoltqphkdbuk<CR>
-
-" 
+""""""""""""""""""""""""""""""
+" 括弧を入力後に括弧内へ移動
+""""""""""""""""""""""""""""""
 inoremap {} {}<LEFT>
 inoremap [] []<LEFT>
 inoremap () ()<LEFT>
@@ -348,25 +339,87 @@ inoremap "" ""<LEFT>
 inoremap '' ''<LEFT>
 inoremap <> <><LEFT>
 
+"----------------------------------------
+" 各種プラグイン設定
+"----------------------------------------
+
+"---plugins---
+set nocompatible
+filetype off
+set rtp+=$VIMFILES/neobundle.vim
+call neobundle#rc()
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'mattn/vimplenote-vim'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'gerw/vim-latex-suite'
+NeoBundle 'motemen/git-vim'
+NeoBundle 'mitechie/pyflakes-pathogen'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'vim-scripts/pythoncomplete'
+NeoBundle 'tyru/caw.vim'
+NeoBundle 'Rip-Rip/clang_complete'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'osyo-manga/neocomplcache-clang_complete'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 't9md/vim-textmanip'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle "thinca/vim-fontzoom"
+NeoBundle 'tpope/vim-surround'
+NeoBundle "jceb/vim-hier"
+NeoBundle 'vim-scripts/gtags.vim'
+NeoBundle "Shougo/neocomplcache-snippets-complete"
+filetype plugin indent on
+
+"---NERDTree---
+nmap <Leader>n :NERDTreeToggle<CR>
+
+"---caw---
+nmap <Leader>c <Plug>(caw:I:toggle)
+vmap <Leader>c <Plug>(caw:I:toggle)
+
+"---textmanip---
 " 選択したテキストの移動
 vmap <C-j> <Plug>(Textmanip.move_selection_down)
 vmap <C-k> <Plug>(Textmanip.move_selection_up)
 vmap <C-h> <Plug>(Textmanip.move_selection_left)
 vmap <C-l> <Plug>(Textmanip.move_selection_right)
-
 " 行の複製
 vmap <M-d> <Plug>(Textmanip.duplicate_selection_v)
 nmap <M-d> <Plug>(Textmanip.duplicate_selection_n)
 
-" tab settings
-"set showtabline=2
-
-
-" neocomplcache
+"---neocomplcache---
 let g:neocomplcache_enable_at_startup = 1
+" スニペットの場所
+let g:NeoComplCache_SnippetsDir = "$VIMFILES/snippets"
+" TABでスニペットを展開
+imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neocomplcache_snippets_expand)
 
-" indent-guides
+
+"---indent-guides---
 let g:indent_guides_guide_size=4
+
+"---GNU global---
+nmap <C-c> :GtagsCursor<CR>
+nmap <C-q> <C-w><C-w><C-w>q
+nmap <C-g> :Gtags -g 
+nmap <C-l> :Gtags -f %<CR>
+nmap <C-j> :Gtags <C-r><C-w><CR>
+nmap <C-k> :Gtags -r <C-r><C-w><CR>
+nmap <C-n> :cn<CR>
+nmap <C-p> :cp<CR>
+
+"---solarized---
+syntax enable
+set background=dark
+set t_Co=256
+let g:solarized_termcolors=16
+colorscheme solarized
+
+"----------------------------------------
+" 一時設定
+"----------------------------------------
 
 
 "---Tex settings---
@@ -417,6 +470,7 @@ autocmd FileType c,cpp,cs setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 no
 autocmd BufNewFile *.cpp 0r $VIMFILES/templates/template.cpp
 autocmd FileType c,cpp set path+=/opt/local/include,~/include
 
+
 "---Python settings---
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd FileType python setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
@@ -428,7 +482,6 @@ function! s:Exec()
     :endfunction
 command! Exec call <SID>Exec() 
 map <silent> <C-P> :call <SID>Exec()<CR>
-
 nmap <F5> :!python %<CR>
 nmap <F12> :!python -m pdb %<CR>
 
@@ -436,50 +489,9 @@ nmap <F12> :!python -m pdb %<CR>
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 "autocmd FileType python set omnifunc=pysmell#Complete
 
+
 "---shell script settings---
 autocmd BufNewFile *.sh 0r $VIMFILES/templates/template.sh
 
-"---gtags settings---
-nmap <C-c> :GtagsCursor<CR>
-nmap <C-q> <C-w><C-w><C-w>q
-nmap <C-g> :Gtags -g 
-nmap <C-l> :Gtags -f %<CR>
-nmap <C-j> :Gtags <C-r><C-w><CR>
-nmap <C-k> :Gtags -r <C-r><C-w><CR>
-nmap <C-n> :cn<CR>
-nmap <C-p> :cp<CR>
 
-"---neobundle settings (must be at the end)---
-set nocompatible
-filetype off
 
-set rtp+=$VIMFILES/neobundle.vim
-call neobundle#rc()
-
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'mattn/vimplenote-vim'
-NeoBundle 'mattn/webapi-vim'
-NeoBundle 'gerw/vim-latex-suite'
-NeoBundle 'motemen/git-vim'
-NeoBundle 'mitechie/pyflakes-pathogen'
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'vim-scripts/pythoncomplete'
-NeoBundle 'tyru/caw.vim'
-NeoBundle 'Rip-Rip/clang_complete'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'osyo-manga/neocomplcache-clang_complete'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 't9md/vim-textmanip'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'taku-o/vim-zoom'
-NeoBundle 'tpope/vim-surround'
-NeoBundle "jceb/vim-hier"
-NeoBundle 'vim-scripts/gtags.vim'
-
-filetype plugin indent on
-
-" カラースキーマ設定
-syntax enable
-set background=dark
-colorscheme solarized
