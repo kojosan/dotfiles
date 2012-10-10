@@ -1,0 +1,10 @@
+snippet     c
+abbr        C++ class
+prev_word   '^'
+    class ${1:name} {
+    public:
+        $1();
+        $1($1 const &);
+        ~$1();
+    private:
+    };
