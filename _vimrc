@@ -366,7 +366,7 @@ NeoBundle "jceb/vim-hier"
 NeoBundle 'vim-scripts/gtags.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle "Shougo/neocomplcache-snippets-complete"
-NeoBundle 'Shougo/neocomplcache-clang'
+" NeoBundle 'Shougo/neocomplcache-clang'
 filetype plugin indent on
 
 "---NERDTree---
