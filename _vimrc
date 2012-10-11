@@ -367,6 +367,12 @@ NeoBundle 'vim-scripts/gtags.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle "Shougo/neocomplcache-snippets-complete"
 " NeoBundle 'Shougo/neocomplcache-clang'
+NeoBundle 'textobj-user'
+NeoBundle 'kana/vim-textobj-function.git'
+NeoBundle 'kana/vim-textobj-indent.git'
+NeoBundle 'thinca/vim-textobj-plugins.git'
+NeoBundle 'Align'
+NeoBundle 'Source-Explorer-srcexpl.vim'
 filetype plugin indent on
 
 "---NERDTree---
