@@ -360,7 +360,7 @@ NeoBundle 'vim-scripts/pythoncomplete'
 NeoBundle 'tyru/caw.vim'
 NeoBundle 'Rip-Rip/clang_complete'
 NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'osyo-manga/neocomplcache-clang_complete'
+NeoBundle 'Shougo/neocomplcache-clang'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 't9md/vim-textmanip'
 NeoBundle 'scrooloose/syntastic'
@@ -395,7 +395,6 @@ let g:NeoComplCache_SnippetsDir = "$VIMFILES/snippets"
 " TABでスニペットを展開
 imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neocomplcache_snippets_expand)
-
 
 "---indent-guides---
 let g:indent_guides_guide_size=4
