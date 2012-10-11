@@ -353,14 +353,10 @@ NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'mattn/vimplenote-vim'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'gerw/vim-latex-suite'
-NeoBundle 'motemen/git-vim'
 NeoBundle 'mitechie/pyflakes-pathogen'
-NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'vim-scripts/pythoncomplete'
 NeoBundle 'tyru/caw.vim'
-NeoBundle 'Rip-Rip/clang_complete'
 NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'Shougo/neocomplcache-clang'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 't9md/vim-textmanip'
 NeoBundle 'scrooloose/syntastic'
@@ -368,7 +364,9 @@ NeoBundle "thinca/vim-fontzoom"
 NeoBundle 'tpope/vim-surround'
 NeoBundle "jceb/vim-hier"
 NeoBundle 'vim-scripts/gtags.vim'
+NeoBundle 'Shougo/neocomplcache'
 NeoBundle "Shougo/neocomplcache-snippets-complete"
+NeoBundle 'Shougo/neocomplcache-clang'
 filetype plugin indent on
 
 "---NERDTree---
