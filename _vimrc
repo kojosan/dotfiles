@@ -366,7 +366,7 @@ NeoBundle "jceb/vim-hier"
 NeoBundle 'vim-scripts/gtags.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle "Shougo/neocomplcache-snippets-complete"
-" NeoBundle 'Shougo/neocomplcache-clang'
+NeoBundle "Rip-Rip/clang_complete.git"
 NeoBundle 'textobj-user'
 NeoBundle 'kana/vim-textobj-function.git'
 NeoBundle 'kana/vim-textobj-indent.git'
@@ -393,12 +393,48 @@ vmap <M-d> <Plug>(Textmanip.duplicate_selection_v)
 nmap <M-d> <Plug>(Textmanip.duplicate_selection_n)
 
 "---neocomplcache---
+" disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 1
-" スニペットの場所
+" " Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Use camel case completion.
+let g:neocomplcache_enable_camel_case_completion = 1
+" Use underbar completion.
+let g:neocomplcache_enable_underbar_completion = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+" neocomplcache で表示される補完の数を増やす
+let g:neocomplcache_max_list=1000
+
+"---neocomplcache-snippets-complete---
 let g:NeoComplCache_SnippetsDir = "$VIMFILES/snippets"
 " TABでスニペットを展開
 imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neocomplcache_snippets_expand)
+
+"---clang_complete---
+"neocomplcache 側の設定
+let g:neocomplcache_force_overwrite_completefunc = 1
+if !exists("g:neocomplcache_force_omni_patterns")
+    let g:neocomplcache_force_omni_patterns = {}
+endif
+" omnifunc が呼び出される場合の正規表現パターンを設定しておく
+let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|::'
+" clang_complete 側の設定
+" clang_complete の自動呼び出しは必ず切っておいて下さい
+let g:clang_complete_auto=0
+" libclang を使用して高速に補完を行う
+let g:clang_use_library=1
+let g:clang_library_path='/opt/local/libexec/llvm-3.2/lib/'
+" clang のコマンドオプション
+let g:clang_user_options =
+    \ "-I /opt/local/include/ ".
+    \ "-I ~/include/ " .
+    \ '-fms-extensions -fgnu-runtime '.
+    \ '-include malloc.h '
 
 "---indent-guides---
 let g:indent_guides_guide_size=4
