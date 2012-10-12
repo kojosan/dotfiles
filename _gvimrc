@@ -36,11 +36,11 @@ endif
 " コマンドラインの高さ
 " set cmdheight=2
 
-" カラー設定:
-" set background=dark
-" let g:solarized_italic=0    "default value is 1
-" syntax enable
-" colorscheme solarized
+カラー設定:
+syntax enable
+set background=dark
+let g:solarized_italic=0    "default value is 1
+colorscheme solarized
 
 if has('mac')
   set guifont=Osaka-Mono:h14
