@@ -141,3 +141,10 @@ kterm*|xterm*)
     }
     ;;
 esac
+
+# OS毎の設定ファイル
+case "${OSTYPE}" in
+darwin*)
+    [ -f ~/dotfiles/_zshrc_alias_osx ] && source ~/dotfiles/_zshrc_alias_osx
+    ;;
+esac
