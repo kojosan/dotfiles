@@ -373,7 +373,24 @@ NeoBundle 'kana/vim-textobj-indent.git'
 NeoBundle 'thinca/vim-textobj-plugins.git'
 NeoBundle 'Align'
 NeoBundle 'Source-Explorer-srcexpl.vim'
+NeoBundle "Shougo/unite.vim.git"
 filetype plugin indent on
+
+"---Unite.vim---
+" 縦分割で開く
+let g:unite_enable_split_vertically = 1
+let g:unite_winwidth = 50
+" バッファ一覧
+nmap <C-u>b :Unite buffer<CR>
+" PWDのファイル一覧
+nmap <C-u>f :UniteWithBufferDir -buffer-name=file file<CR>
+" 最近使用したファイル一覧
+nmap <C-u>m :Unite file_mru<CR>
+" レジスタ一覧
+nmap <C-u>r :Unite -buffer-name=register register<CR>
+" ファイルとバッファ一覧
+nmap <C-u>u :UniteWithBufferDir buffer file_mru file<CR>
+
 
 "---NERDTree---
 nmap <Leader>n :NERDTreeToggle<CR>
