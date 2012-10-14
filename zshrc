@@ -145,9 +145,9 @@ esac
 # OS毎の設定ファイル
 case "${OSTYPE}" in
 darwin*)
-    [ -f ~/dotfiles/_zshrc_osx ] && source ~/dotfiles/_zshrc_osx
+    [ -f ~/dotfiles/zshrc_osx ] && source ~/dotfiles/zshrc_osx
     ;;
 linux*)
-    [ -f ~/dotfiles/_zshrc_linux ] && source ~/dotfiles/_zshrc_linux
+    [ -f ~/dotfiles/zshrc_linux ] && source ~/dotfiles/zshrc_linux
     ;;
 esac

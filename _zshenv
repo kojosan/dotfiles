@@ -1,8 +1,0 @@
-case "${OSTYPE}" in
-darwin*)
-    [ -f ~/dotfiles/_zshenv_osx ] && source ~/dotfiles/_zshenv_osx
-    ;;
-linux*)
-    [ -f ~/dotfiles/_zshrc_linux ] && source ~/dotfiles/_zshenv_linux
-    ;;
-esac
