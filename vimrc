@@ -383,7 +383,7 @@ NeoBundle "taglist.vim"
 filetype plugin indent on
 
 "---taglist---
-nnoremap <Leader>t :TlistToggle
+nmap <Leader>t :TlistToggle<CR>
 
 "---Unite.vim---
 " 縦分割で開く
