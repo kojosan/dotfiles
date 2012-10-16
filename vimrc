@@ -382,6 +382,9 @@ NeoBundle "Shougo/unite.vim.git"
 NeoBundle "taglist.vim"
 filetype plugin indent on
 
+"---taglist---
+nnoremap <Leader>t :TlistToggle
+
 "---Unite.vim---
 " 縦分割で開く
 let g:unite_enable_split_vertically = 1
