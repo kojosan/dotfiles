@@ -211,6 +211,11 @@ nnoremap j gj
 nnoremap k gk
 nnoremap l <Right>zv
 
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 "----------------------------------------
 " 挿入モード
 "----------------------------------------
@@ -374,6 +379,7 @@ NeoBundle 'thinca/vim-textobj-plugins.git'
 NeoBundle 'Align'
 NeoBundle 'Source-Explorer-srcexpl.vim'
 NeoBundle "Shougo/unite.vim.git"
+NeoBundle "taglist.vim"
 filetype plugin indent on
 
 "---Unite.vim---
@@ -391,6 +397,9 @@ nmap <C-u>r :Unite -buffer-name=register register<CR>
 " ファイルとバッファ一覧
 nmap <C-u>u :UniteWithBufferDir buffer file_mru file<CR>
 
+"---syntastic---
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=2
 
 "---NERDTree---
 nmap <Leader>n :NERDTreeToggle<CR>
