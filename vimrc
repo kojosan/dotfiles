@@ -456,14 +456,17 @@ let g:clang_user_options =
 let g:indent_guides_guide_size=4
 
 "---GNU global---
-nmap <C-c> :GtagsCursor<CR>
-nmap <C-q> <C-w><C-w><C-w>q
-nmap <C-g> :Gtags -g 
-nmap <C-l> :Gtags -f %<CR>
-nmap <C-j> :Gtags <C-r><C-w><CR>
-nmap <C-k> :Gtags -r <C-r><C-w><CR>
-nmap <C-n> :cn<CR>
-nmap <C-p> :cp<CR>
+" 検索ウインドウを閉じる
+nnoremap <C-q> <C-w><C-w><C-w>q
+" grepする
+nnoremap <C-g> :Gtags -g 
+" カーソル下の定義を探す
+nnoremap <C-d> :Gtags <C-r><C-w><CR>
+" カーソル下が参照されている場所を探す
+nnoremap <C-r> :Gtags -r <C-r><C-w><CR>
+" 次/前の検索結果
+nnoremap <C-n> :cn<CR>
+nnoremap <C-p> :cp<CR>
 
 "---solarized---
 syntax enable
