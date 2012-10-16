@@ -211,6 +211,7 @@ nnoremap j gj
 nnoremap k gk
 nnoremap l <Right>zv
 
+" ウインドウ移動を簡単に
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -363,7 +364,6 @@ NeoBundle 'vim-scripts/pythoncomplete'
 NeoBundle 'tyru/caw.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 't9md/vim-textmanip'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle "thinca/vim-fontzoom"
 NeoBundle 'tpope/vim-surround'
@@ -395,7 +395,7 @@ nmap <C-u>m :Unite file_mru<CR>
 " レジスタ一覧
 nmap <C-u>r :Unite -buffer-name=register register<CR>
 " ファイルとバッファ一覧
-nmap <C-u>u :UniteWithBufferDir buffer file_mru file<CR>
+nmap <C-u>u :Unite buffer file_mru file<CR>
 
 "---syntastic---
 let g:syntastic_enable_signs=1
@@ -407,16 +407,6 @@ nmap <Leader>n :NERDTreeToggle<CR>
 "---caw---
 nmap <Leader>c <Plug>(caw:I:toggle)
 vmap <Leader>c <Plug>(caw:I:toggle)
-
-"---textmanip---
-" 選択したテキストの移動
-vmap <C-j> <Plug>(Textmanip.move_selection_down)
-vmap <C-k> <Plug>(Textmanip.move_selection_up)
-vmap <C-h> <Plug>(Textmanip.move_selection_left)
-vmap <C-l> <Plug>(Textmanip.move_selection_right)
-" 行の複製
-vmap <M-d> <Plug>(Textmanip.duplicate_selection_v)
-nmap <M-d> <Plug>(Textmanip.duplicate_selection_n)
 
 "---neocomplcache---
 " disable AutoComplPop.
