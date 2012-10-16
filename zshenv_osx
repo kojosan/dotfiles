@@ -5,4 +5,4 @@ export PYTHONPATH=~/lib/python:$PYTHONPATH
 export PAGER=/opt/local/bin/lv
 export EDITOR="/Applications/MacVim.app/Contents/MacOS/mvim -v"
 export OSTYPE
-
+export GTAGSLIBPATH=~/.tags/opt/
