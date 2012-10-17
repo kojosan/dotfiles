@@ -384,6 +384,7 @@ filetype plugin indent on
 
 "---taglist---
 nmap <Leader>t :TlistToggle<CR>
+let Tlist_Exit_OnlyWindow = 1
 
 "---Unite.vim---
 " 縦分割で開く
@@ -454,6 +455,11 @@ let g:clang_user_options =
     \ "-I ~/include/ " .
     \ '-fms-extensions -fgnu-runtime '.
     \ '-include malloc.h '
+
+"---Source Explorer---
+let g:SrcExpl_RefreshTime = 1
+let g:SrcExpl_UpdateTags = 1
+nmap <C-s> :SrcExplToggle<CR>
 
 "---indent-guides---
 let g:indent_guides_guide_size=4
