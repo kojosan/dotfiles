@@ -380,8 +380,17 @@ NeoBundle 'Align'
 NeoBundle 'Source-Explorer-srcexpl.vim'
 NeoBundle "Shougo/unite.vim.git"
 NeoBundle "taglist.vim"
+NeoBundle "plasticboy/vim-markdown"
+NeoBundle "tyru/open-browser.vim"
 filetype plugin indent on
 
+"---quickrun---
+" markdown
+let g:quickrun_config = {}
+let g:quickrun_config['mkd'] = {
+      \ 'command': 'kramdown',
+      \ 'outputter': 'browser'
+      \ }
 "---taglist---
 nmap <Leader>t :TlistToggle<CR>
 let Tlist_Exit_OnlyWindow = 1
