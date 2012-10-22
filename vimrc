@@ -382,7 +382,20 @@ NeoBundle "Shougo/unite.vim.git"
 NeoBundle "taglist.vim"
 NeoBundle "plasticboy/vim-markdown"
 NeoBundle "tyru/open-browser.vim"
+NeoBundle 'glidenote/memolist.vim'
+" NeoBundle 'davidhalter/jedi-vim'
 filetype plugin indent on
+
+"---jedi-vim---
+" autocmd FileType python let b:did_ftplugin = 1
+" let g:jedi#auto_initialization = 0
+" let g:jedi#popup_on_dot = 1
+
+"---memolist---
+map <Leader>mn  :MemoNew<CR>
+map <Leader>ml  :MemoList<CR>
+map <Leader>mg  :MemoGrep<CR>
+let g:memolist_path = "$HOME/Dropbox/memo"
 
 "---quickrun---
 " markdown
