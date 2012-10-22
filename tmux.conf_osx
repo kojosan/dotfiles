@@ -106,4 +106,4 @@ set -g default-terminal "xterm-256color"
 # Macのクリップボードを使用するための設定
 set-option -g default-command "reattach-to-user-namespace -l zsh"
 # ヤンクした内容をクリップボードへ
-bind C-y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"opy-line
+bind y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
