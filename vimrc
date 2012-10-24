@@ -380,7 +380,7 @@ NeoBundle 'Align'
 NeoBundle 'Source-Explorer-srcexpl.vim'
 NeoBundle "Shougo/unite.vim.git"
 NeoBundle "taglist.vim"
-NeoBundle "plasticboy/vim-markdown"
+NeoBundle "tpope/vim-markdown"
 NeoBundle "tyru/open-browser.vim"
 NeoBundle 'glidenote/memolist.vim'
 " NeoBundle 'davidhalter/jedi-vim'
@@ -400,7 +400,7 @@ let g:memolist_path = "$HOME/Dropbox/memo"
 "---quickrun---
 " markdown
 let g:quickrun_config = {}
-let g:quickrun_config['mkd'] = {
+let g:quickrun_config['markdown'] = {
       \ 'command': 'kramdown',
       \ 'outputter': 'browser'
       \ }
@@ -581,6 +581,3 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 "---shell script settings---
 autocmd BufNewFile *.sh 0r $VIMFILES/templates/template.sh
-
-
-
