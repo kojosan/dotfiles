@@ -1,5 +1,5 @@
 [core]
-	editor = /opt/local/bin/vim
+	editor = vim
 [tig "bind"]
 	generic = g move-first-line
 	generic = G move-last-line
