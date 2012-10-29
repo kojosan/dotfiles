@@ -514,6 +514,7 @@ colorscheme solarized
 "---Tex settings---
 autocmd FileType tex setl tabstop=4 shiftwidth=4 softtabstop=4
 " Vim-LaTeX
+" ':TTarget dvi' or ':TTarget pdf' でターゲット変更
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 let g:Imap_UsePlaceHolders = 1
@@ -522,25 +523,21 @@ let g:Imap_StickyPlaceHolders = 0
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_FormatDependency_ps = 'dvi,ps'
 let g:Tex_FormatDependency_pdf = 'dvi,pdf'
-let g:Tex_AutoFolding = 0
+" let g:Tex_AutoFolding = 0
 if has("win32") || has("win64")
     let g:Tex_CompileRule_dvi = 'platex -kanji=utf8 -guess-input-enc -synctex=1 -interaction=nonstopmode $*'
-    "let g:Tex_CompileRule_dvi = 'uplatex -kanji=utf8 -no-guess-input-enc -synctex=1 -interaction=nonstopmode $*'
     let g:Tex_CompileRule_ps = 'dvips -Ppdf -t a4 -o $*.ps $*.dvi'
     let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
     let g:Tex_BibtexFlavor = 'pbibtex -kanji=utf8'
-    "let g:Tex_BibtexFlavor = 'upbibtex'
     let g:Tex_MakeIndexFlavor = 'mendex -U $*.idx'  
     let g:Tex_ViewRule_dvi = 'C:/w32tex/dviout/dviout.exe -1'
     let g:Tex_ViewRule_ps = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance'
     let g:Tex_ViewRule_pdf = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance -inverse-search "C:\vim73-kaoriya-win32\gvim.exe -n -c \":RemoteOpen +\%l \%f\""'
 elseif has("macunix")
     let g:Tex_CompileRule_dvi = '/usr/texbin/platex -kanji=utf8 -guess-input-enc -synctex=1 --interaction=nonstopmode $*'
-    "let g:Tex_CompileRule_dvi = '/usr/texbin/uplatex -synctex=1 -interaction=nonstopmode $*'
     let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -t a4 -o $*.ps $*.dvi'
     let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx -p a4 $*.dvi'
     let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
-    "let g:Tex_BibtexFlavor = '/usr/texbin/upbibtex'
     let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex $*.idx'
     let g:Tex_UseEditorSettingInDVIViewer = 1
     "let g:Tex_ViewRule_dvi = '/usr/texbin/pxdvi -watchfile 1 -editor "vim --servername vim-latex -n --remote-silent +\%l \%f"'
@@ -548,11 +545,7 @@ elseif has("macunix")
     "let g:Tex_ViewRule_dvi = '/usr/bin/open -a Mxdvi.app'
     let g:Tex_ViewRule_ps = '/usr/local/bin/gv --watch'
     let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
-    "let g:Tex_ViewRule_pdf = '/usr/bin/open -a Skim.app'
-    "let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXShop.app'
-    "let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXworks.app'
 endif
-
 
 "---C/C++ settings---
 autocmd FileType c,cpp,cs setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 nowrap
