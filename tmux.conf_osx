@@ -53,7 +53,7 @@ set-window-option -g clock-mode-colour colour64 #green
 #---key binds---
 # Set the prefix to ^A.
 unbind C-b
-set -g prefix ^j
+set -g prefix ^t
 bind a send-prefix
 
 # split windows like vim
