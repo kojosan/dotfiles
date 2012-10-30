@@ -1,0 +1,126 @@
+\documentclass[a4j,11pt]{jsarticle}
+
+\usepackage[dvipdfm]{graphicx}
+% ギリシャ文字や数学記号
+\usepackage{amsmath,amssymb}
+% 数式環境内の太字 i.e. \bm x
+\usepackage{bm,bbm}
+% 枠付き文章 itembox, screen, boxnote, shadebox i.e. \begine{screen} ~ \end{screen}
+\usepackage{ascmac}
+% 図表の出力位置を[H]で強制的に指定
+\usepackage{here}
+\usepackage{calc}
+\usepackage{layout}
+\usepackage{subfigure}
+% アルゴリズムの記述
+\usepackage{algorithm}
+%\usepackage[expert, deluxe]{otf}
+
+\makeatletter
+%maketitleの定義
+\def\abstract#1{\long\def\@abstract{#1}}
+\def\@abstract{}
+\def\@maketitle{
+    \begin{center}\normalsize\headfont\@title\end{center}
+    %\begin{center}\normalsize\headfont\@subtitle\end{center}
+    \begin{center}\normalsize\headfont\@author\end{center}
+    \vspace{\baselineskip}
+}
+
+%sectionの定義
+\renewcommand{\section}{%
+	\@startsection{section}%
+		{1}%	level
+		{\z@}%	indent
+		{-3.5ex \@plus -1ex \@minus -.2ex}%	beforeskip
+		{2.3ex \@plus.2ex}%	afterskip
+		{\normalsize\headfont\raggedright}%	style
+}
+
+%subsectionの定義
+\renewcommand{\subsection}{%
+	\@startsection{subsection}%
+		{2}%	level
+		{\z@}%	indent
+		{-3.25ex\@plus -1ex \@minus -.2ex}%	beforeskip
+		{1.5ex \@plus .2ex}%	afterskip
+		{\normalsize\headfont}%	style
+}
+
+%subsectionの定義
+\renewcommand{\subsubsection}{%
+	\@startsection{subsubsection}%
+		{3}%	level
+		{\z@}%	indent
+		{-3.25ex\@plus -1ex \@minus -.2ex}%	beforeskip
+		{1.5ex \@plus .2ex}%	afterskip
+		{\normalsize\headfont}%	style
+}
+
+
+%行間
+%\renewcommand{\baselinestretch}{1.1}
+
+%余白設定
+\setlength{\topmargin}{-1.0truein + 0.5truein}
+\setlength{\headheight}{1\baselineskip}
+\setlength{\headsep}{1\baselineskip}
+\setlength{\topskip}{0truemm}
+\setlength{\footskip}{2\baselineskip}
+\setlength{\textheight}{\paperheight - (\topmargin + \headheight + \headsep) - (\footskip + 0.5truein + 1.0truein)}
+\setlength{\oddsidemargin}{-1.0truein + 1.0truein}
+\setlength{\evensidemargin}{-1.0truein + 1.0truein}
+\setlength{\linewidth}{85truemm}
+\setlength{\textwidth}{\paperwidth - 2.0truein}
+\setlength{\marginparwidth}{0truemm}
+\setlength{\marginparsep}{0truemm}
+\setlength{\columnsep}{10truemm}
+
+%ページ設定
+\pagestyle{plain}
+%\pagestyle{plainfoot}
+%\setcounter{page}{15}
+
+%図の周りの間隔
+\setlength{\floatsep}{10pt}
+\setlength{\textfloatsep}{10pt}
+\setlength{\intextsep}{10pt}
+\setlength{\dblfloatsep}{0pt}
+\setlength{\dbltextfloatsep}{0pt}
+\setlength{\abovecaptionskip}{0pt}
+
+\renewcommand{\subfigtopskip}{0pt}
+\renewcommand{\subfigcapskip}{0pt}
+\renewcommand{\subfigcaptopadj}{0pt}
+\renewcommand{\subfigbottomskip}{0pt}
+\renewcommand{\subfigcapmargin}{0pt}
+\renewcommand{\subfiglabelskip}{0pt}
+
+%Captionの設定
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Table.}
+
+% 数式
+% argmax/argmin i.e. \argmax_{下付き} 〜
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+% 微分記号
+\newcommand{\diff}{\mathrm{d}}
+% div, grad, rot
+\newcommand{\divergence}{\mathrm{div}\,}
+\newcommand{\grad}{\mathrm{grad}\,}
+\newcommand{\rot}{\mathrm{rot}\,}
+
+
+\makeatother
+
+\bibliographystyle{jplain}
+
+\title{}
+\author{}
+
+\begin{document}
+\maketitle
+
+\end{document}
+
