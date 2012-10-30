@@ -512,7 +512,7 @@ colorscheme solarized
 
 
 "---Tex settings---
-autocmd FileType tex setl tabstop=4 shiftwidth=4 softtabstop=4
+autocmd FileType tex setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd BufNewFile *.tex 0r $VIMFILES/templates/template.tex
 " Vim-LaTeX
 " ':TTarget dvi' or ':TTarget pdf' でターゲット変更
