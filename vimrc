@@ -524,6 +524,7 @@ let g:Imap_StickyPlaceHolders = 0
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_FormatDependency_ps = 'dvi,ps'
 let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+let g:Tex_FormatDependency_eps = 'dvi,eps'
 " let g:Tex_AutoFolding = 0
 if has("win32") || has("win64")
     let g:Tex_CompileRule_dvi = 'platex -kanji=utf8 -guess-input-enc -synctex=1 -interaction=nonstopmode $*'
@@ -538,12 +539,11 @@ elseif has("macunix")
     let g:Tex_CompileRule_dvi = '/usr/texbin/platex -kanji=utf8 -guess-input-enc -synctex=1 --interaction=nonstopmode $*'
     let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -t a4 -o $*.ps $*.dvi'
     let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx -p a4 $*.dvi'
+    let g:Tex_CompileRule_eps = '/usr/texbin/dvips -E -Ppdf -x 5000 -o $*.eps $*.dvi'
     let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
     let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex $*.idx'
     let g:Tex_UseEditorSettingInDVIViewer = 1
-    "let g:Tex_ViewRule_dvi = '/usr/texbin/pxdvi -watchfile 1 -editor "vim --servername vim-latex -n --remote-silent +\%l \%f"'
     let g:Tex_ViewRule_dvi = '/usr/bin/open -a PictPrinter.app'
-    "let g:Tex_ViewRule_dvi = '/usr/bin/open -a Mxdvi.app'
     let g:Tex_ViewRule_ps = '/usr/local/bin/gv --watch'
     let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
 endif
