@@ -15,7 +15,10 @@ set-option -g set-titles-string "@#(hostname | sed 's/\\\\..*//')"
 # 右部:[2011/03/06(Sun)20:21]
 # set -g status-right '#[fg=green,bold][%Y/%m/%d(%a)%H:%M]#[default]'
 
-# マウスでペイン選択
+
+# マウス
+set-option -g mode-mouse on
+set-option -g mouse-resize-pane on
 set-option -g mouse-select-pane on
 
 #---Color (Solarized 256)---
