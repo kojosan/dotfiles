@@ -404,6 +404,7 @@ let g:quickrun_config['markdown'] = {
       \ 'command': 'kramdown',
       \ 'outputter': 'browser'
       \ }
+
 "---taglist---
 nmap <Leader>t :TlistToggle<CR>
 let Tlist_Exit_OnlyWindow = 1
@@ -494,7 +495,7 @@ nnoremap <C-g> :Gtags -g
 " カーソル下の定義を探す
 nnoremap <C-d> :Gtags <C-r><C-w><CR>
 " カーソル下が参照されている場所を探す
-nnoremap <C-r> :Gtags -r <C-r><C-w><CR>
+nnoremap <C-c> :Gtags -r <C-r><C-w><CR>
 " 次/前の検索結果
 nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cp<CR>
@@ -572,6 +573,8 @@ nmap <F12> :!python -m pdb %<CR>
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 "autocmd FileType python set omnifunc=pysmell#Complete
 
-
 "---shell script settings---
 autocmd BufNewFile *.sh 0r $VIMFILES/templates/template.sh
+
+"---shell script settings---
+autocmd FileType markdown,md setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
