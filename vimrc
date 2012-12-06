@@ -401,9 +401,9 @@ let g:memolist_path = "$HOME/Dropbox/memo"
 " markdown
 let g:quickrun_config = {}
 let g:quickrun_config['markdown'] = {
-      \ 'command': 'kramdown',
-      \ 'outputter': 'browser'
-      \ }
+        \ 'exec': ['cat %s|nkf -s|kramdown > memo.html', 'open memo.html'],
+        \ 'outputter': 'null'
+        \ }
 
 "---taglist---
 nmap <Leader>t :TlistToggle<CR>
