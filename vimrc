@@ -493,7 +493,7 @@ nnoremap <C-q> <C-w><C-w><C-w>q
 " grepする
 nnoremap <C-g> :Gtags -g 
 " カーソル下の定義を探す
-nnoremap <C-d> :Gtags <C-r><C-w><CR>
+nnoremap <C-s> :Gtags <C-r><C-w><CR>
 " カーソル下が参照されている場所を探す
 nnoremap <C-c> :Gtags -r <C-r><C-w><CR>
 " 次/前の検索結果
