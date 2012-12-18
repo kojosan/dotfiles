@@ -356,8 +356,6 @@ set rtp+=$VIMFILES/neobundle.vim
 call neobundle#rc()
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'mattn/vimplenote-vim'
-NeoBundle 'mattn/webapi-vim'
 NeoBundle 'gerw/vim-latex-suite'
 NeoBundle 'mitechie/pyflakes-pathogen'
 NeoBundle 'vim-scripts/pythoncomplete'
@@ -370,7 +368,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle "jceb/vim-hier"
 NeoBundle 'vim-scripts/gtags.vim'
 NeoBundle 'Shougo/neocomplcache'
-NeoBundle "Shougo/neocomplcache-snippets-complete"
+NeoBundle "Shougo/neosnippet"
 NeoBundle "Rip-Rip/clang_complete.git"
 NeoBundle 'textobj-user'
 NeoBundle 'kana/vim-textobj-function.git'
@@ -383,13 +381,7 @@ NeoBundle "taglist.vim"
 NeoBundle "tpope/vim-markdown"
 NeoBundle "tyru/open-browser.vim"
 NeoBundle 'glidenote/memolist.vim'
-" NeoBundle 'davidhalter/jedi-vim'
 filetype plugin indent on
-
-"---jedi-vim---
-" autocmd FileType python let b:did_ftplugin = 1
-" let g:jedi#auto_initialization = 0
-" let g:jedi#popup_on_dot = 1
 
 "---memolist---
 map <Leader>mn  :MemoNew<CR>
@@ -578,3 +570,6 @@ autocmd BufNewFile *.sh 0r $VIMFILES/templates/template.sh
 
 "---shell script settings---
 autocmd FileType markdown,md setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
+
+" read local vimrc file
+source $HOME/dotfiles/vimrc_local
