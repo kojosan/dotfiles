@@ -1,5 +1,9 @@
 # PATH
-export PATH=~/bin:/opt/local/bin:$PATH
+export PATH=~/bin:/opt/local/bin:/Developer/NVIDIA/CUDA-5.0/bin:$PATH
+export DYLD_LIBRARY_PATH=/Developer/NVIDIA/CUDA-5.0/lib:$DYLD_LIBRARY_PATH
+export C_INCLUDE_PATH="/Developer/GPU Computing/C/common/inc":/opt/local/include:~/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH="/Developer/GPU Computing/C/common/inc":/opt/local/include:~/include:$CPLUS_INCLUDE_PATH
+export LIBRARY_PATH=/opt/local/lib:~/lib:$DYLD_LIBRARY_PATH
 export MANPATH=~/man:/opt/local/man:$MANPATH
 export PYTHONPATH=~/lib/python:$PYTHONPATH
 export PAGER=/opt/local/bin/lv
