@@ -42,25 +42,15 @@ set background=dark
 let g:solarized_italic=0    "default value is 1
 colorscheme solarized
 
-if has('mac')
-  set guifont=Osaka-Mono:h14
+" フォント設定
+if has('xfontset')
+  set guifontset=a14,r14,k14
+elseif has('mac')
+  set guifont=Monaco:h14
 elseif has('win32') || has('win64')
   set guifont=MS_Gothic:h12:cSHIFTJIS
   set guifontwide=MS_Gothic:h12:cSHIFTJIS
 endif
-
-" フォント設定
-" フォントは英語名で指定すると問題が起きにくくなります
-" if has('xfontset')
-"   set guifontset=a14,r14,k14
-" elseif has('unix')
-" 
-" elseif has('mac')
-"   set guifont=Osaka-Mono:h20
-" elseif has('win32') || has('win64')
-"   " set guifont=MS_Gothic:h12:cSHIFTJIS
-"   " set guifontwide=MS_Gothic:h12:cSHIFTJIS
-" endif
 
 " 印刷用フォント
 if has('printer')
@@ -73,40 +63,40 @@ endif
 """"""""""""""""""""""""""""""
 " " Window位置の保存と復帰
 " """"""""""""""""""""""""""""""
-" if has('unix')
-"   let s:infofile = '~/.vim/.vimpos'
-" else
-"   let s:infofile = '~/_vimpos'
-" endif
-" 
-" function! s:SaveWindowParam(filename)
-"   redir => pos
-"   exec 'winpos'
-"   redir END
-"   let pos = matchstr(pos, 'X[-0-9 ]\+,\s*Y[-0-9 ]\+$')
-"   let file = expand(a:filename)
-"   let str = []
-"   let cmd = 'winpos '.substitute(pos, '[^-0-9 ]', '', 'g')
-"   cal add(str, cmd)
-"   let l = &lines
-"   let c = &columns
-"   cal add(str, 'set lines='. l.' columns='. c)
-"   silent! let ostr = readfile(file)
-"   if str != ostr
-"     call writefile(str, file)
-"   endif
-" endfunction
-" 
-" augroup SaveWindowParam
-"   autocmd!
-"   execute 'autocmd SaveWindowParam VimLeave * call s:SaveWindowParam("'.s:infofile.'")'
-" augroup END
-" 
-" if filereadable(expand(s:infofile))
-"   execute 'source '.s:infofile
-" endif
-" unlet s:infofile
-" 
+if has('unix') || has('mac')
+  let s:infofile = '~/.vim/.vimpos'
+elseif has('win32') || has('win64')
+  let s:infofile = '~/_vimpos'
+endif
+
+function! s:SaveWindowParam(filename)
+  redir => pos
+  exec 'winpos'
+  redir END
+  let pos = matchstr(pos, 'X[-0-9 ]\+,\s*Y[-0-9 ]\+$')
+  let file = expand(a:filename)
+  let str = []
+  let cmd = 'winpos '.substitute(pos, '[^-0-9 ]', '', 'g')
+  cal add(str, cmd)
+  let l = &lines
+  let c = &columns
+  cal add(str, 'set lines='. l.' columns='. c)
+  silent! let ostr = readfile(file)
+  if str != ostr
+    call writefile(str, file)
+  endif
+endfunction
+
+augroup SaveWindowParam
+  autocmd!
+  execute 'autocmd SaveWindowParam VimLeave * call s:SaveWindowParam("'.s:infofile.'")'
+augroup END
+
+if filereadable(expand(s:infofile))
+  execute 'source '.s:infofile
+endif
+unlet s:infofile
+
 " "----------------------------------------
 " "メニューアイテム作成
 " "----------------------------------------
