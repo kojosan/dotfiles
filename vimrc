@@ -381,7 +381,12 @@ NeoBundle "taglist.vim"
 NeoBundle "tpope/vim-markdown"
 NeoBundle "tyru/open-browser.vim"
 NeoBundle 'glidenote/memolist.vim'
+NeoBundle 'operator-user'
+NeoBundle 'operator-replace'
 filetype plugin indent on
+
+"---operator-replace---
+nmap R <Plug>(operator-replace)
 
 "---memolist---
 map <Leader>mn  :MemoNew<CR>
@@ -542,7 +547,7 @@ elseif has("macunix")
 endif
 
 "---C/C++ settings---
-autocmd FileType c,cpp,cs setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 nowrap
+autocmd FileType c,cpp,cs,cuda setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 nowrap
 autocmd BufNewFile *.cpp 0r $VIMFILES/templates/template.cpp
 autocmd FileType c,cpp set path+=/opt/local/include,~/include
 
