@@ -5,6 +5,7 @@ set -g status-interval 5
 set -g status-left-length 100
 set -g status-right-length 50
 
+
 set-option -g set-titles on
 # www1.hoge.com -> www1のみ表示。
 set-option -g set-titles-string "@#(hostname | sed 's/\\\\..*//')"
@@ -15,6 +16,8 @@ set-option -g set-titles-string "@#(hostname | sed 's/\\\\..*//')"
 # 右部:[2011/03/06(Sun)20:21]
 # set -g status-right '#[fg=green,bold][%Y/%m/%d(%a)%H:%M]#[default]'
 
+# ヒストリー
+set-option -g history-limit 10000
 
 # マウス
 set-option -g mode-mouse on
