@@ -419,7 +419,7 @@ nmap <C-u>m :Unite file_mru<CR>
 " レジスタ一覧
 nmap <C-u>r :Unite -buffer-name=register register<CR>
 " ファイルとバッファ一覧
-nmap <C-u>u :Unite buffer file_mru file<CR>
+nmap <C-u>u :Unite buffer file file_mru<CR>
 
 "---syntastic---
 let g:syntastic_enable_signs=1
