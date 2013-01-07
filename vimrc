@@ -409,7 +409,7 @@ let Tlist_Exit_OnlyWindow = 1
 "---Unite.vim---
 " 縦分割で開く
 let g:unite_enable_split_vertically = 1
-let g:unite_winwidth = 50
+let g:unite_winwidth = 80
 " バッファ一覧
 nmap <C-u>b :Unite buffer<CR>
 " PWDのファイル一覧
