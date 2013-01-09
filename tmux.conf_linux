@@ -5,6 +5,7 @@ set -g status-interval 5
 set -g status-left-length 100
 set -g status-right-length 50
 
+
 set-option -g set-titles on
 # www1.hoge.com -> www1のみ表示。
 set-option -g set-titles-string "@#(hostname | sed 's/\\\\..*//')"
@@ -15,45 +16,50 @@ set-option -g set-titles-string "@#(hostname | sed 's/\\\\..*//')"
 # 右部:[2011/03/06(Sun)20:21]
 # set -g status-right '#[fg=green,bold][%Y/%m/%d(%a)%H:%M]#[default]'
 
-# マウスでペイン選択
+# ヒストリー
+set-option -g history-limit 10000
+
+# マウス
+set-option -g mode-mouse on
+set-option -g mouse-resize-pane on
 set-option -g mouse-select-pane on
 
-# #---Color (Solarized 256)---
-# # default statusbar colors
-# set-option -g status-bg colour235 #base02
-# set-option -g status-fg colour136 #yellow
-# set-option -g status-attr default
-#
-# # default window title colors
-# set-window-option -g window-status-fg colour244 #base0
-# set-window-option -g window-status-bg default
-# #set-window-option -g window-status-attr dim
-#
-# # active window title colors
-# set-window-option -g window-status-current-fg colour166 #orange
-# set-window-option -g window-status-current-bg default
-# #set-window-option -g window-status-current-attr bright
-#
-# # pane border
-# set-option -g pane-border-fg colour235 #base02
-# set-option -g pane-active-border-fg colour240 #base01
-#
-# # message text
-# set-option -g message-bg colour235 #base02
-# set-option -g message-fg colour166 #orange
-#
-# # pane number display
-# set-option -g display-panes-active-colour colour33 #blue
-# set-option -g display-panes-colour colour166 #orange
-#
-# # clock
-# set-window-option -g clock-mode-colour colour64 #green
+#---Color (Solarized 256)---
+# default statusbar colors
+set-option -g status-bg colour235 #base02
+set-option -g status-fg colour136 #yellow
+set-option -g status-attr default
+
+# default window title colors
+set-window-option -g window-status-fg colour244 #base0
+set-window-option -g window-status-bg default
+#set-window-option -g window-status-attr dim
+
+# active window title colors
+set-window-option -g window-status-current-fg colour166 #orange
+set-window-option -g window-status-current-bg default
+#set-window-option -g window-status-current-attr bright
+
+# pane border
+set-option -g pane-border-fg colour235 #base02
+set-option -g pane-active-border-fg colour240 #base01
+
+# message text
+set-option -g message-bg colour235 #base02
+set-option -g message-fg colour166 #orange
+
+# pane number display
+set-option -g display-panes-active-colour colour33 #blue
+set-option -g display-panes-colour colour166 #orange
+
+# clock
+set-window-option -g clock-mode-colour colour64 #green
 
 
 #---key binds---
 # Set the prefix to ^A.
 unbind C-b
-set -g prefix ^j
+set -g prefix ^t
 bind a send-prefix
 
 # split windows like vim
@@ -98,6 +104,3 @@ bind Q confirm-before -p "kill-window #W? (y/n)" kill-window
 
 # 設定リロード
 bind r source-file ~/.tmux.conf
-
-# terminal settings
-set -g default-terminal "xterm-256color"
