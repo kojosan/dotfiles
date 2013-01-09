@@ -1,6 +1,0 @@
-" ---simplenote---
-let g:SimplenoteUsername = "kojopy-mes@hotmail.co.jp"
-let g:SimplenotePassword = "bepjuoltqphkdbuk"
-
-" ---evervim---
-let g:evervim_devtoken='S=s8:U=fcaab:E=142cc1c97db:C=13b746b6bdc:P=1cd:A=en-devtoken:H=7eb6d025382e37fa2b0c1d0715a4b2e1'
