@@ -151,3 +151,25 @@ linux*)
     [ -f ~/dotfiles/zshrc_linux ] && source ~/dotfiles/zshrc_linux
     ;;
 esac
+
+# tmux
+alias tm='tmux'
+alias tma='tmux attach'
+alias tma0='tmux attach -t 0'
+alias tma1='tmux attach -t 1'
+alias tma2='tmux attach -t 2'
+alias tml='tmux list-sessions'
+
+# git
+alias g='git'
+alias ga='git add'
+alias gs='git status -s -b'
+alias gl='git log --stat --graph --oneline --color'
+alias gc='git commit -v'
+alias gca='git commit -va'
+alias gcm='git commit -vm'
+alias gd="git diff --color"
+alias gdc="git diff --cached --color"
+alias gss="git stash save"
+alias gsl="git stash list"
+alias gsp="git stash pop"
