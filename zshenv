@@ -7,4 +7,6 @@ linux*)
     ;;
 esac
 
+[ -f ~/.zshenv_local ] && source ~/.zshenv_local
+
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
