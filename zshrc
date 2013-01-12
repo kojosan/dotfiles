@@ -128,10 +128,11 @@ export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46
 autoload colors
 colors
 PROMPT="
-%{${fg[green]}%}[%n@%m] (%D %T)  %(!.#.$) %{${reset_color}%}"
+%{${fg[green]}%}(%D %T) %n@%m:%~
+%(!.#.$) %{${reset_color}%}"
 PROMPT2="%{${fg[green]}%}%_> %{${reset_color}%}"
 SPROMPT="%{${fg[red]}%}correct: %R -> %r [nyae]? %{${reset_color}%}"
-RPROMPT="%{${fg[green]}%}[%~]%{${reset_color}%}"
+RPROMPT=""
 
 # 時刻更新
 # TRAPALRM() { zle reset-prompt }
