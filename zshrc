@@ -182,3 +182,6 @@ alias gdc="git diff --cached --color"
 alias gss="git stash save"
 alias gsl="git stash list"
 alias gsp="git stash pop"
+
+# gibo completion
+[ -f ~/.gibo-completion.zsh ] && source ~/.zshrc_local

@@ -577,6 +577,6 @@ autocmd BufNewFile *.sh 0r $VIMFILES/templates/template.sh
 autocmd FileType markdown,md setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " read local vimrc file
-if exists($HOME."/dotfiles/vimrc_local")
-    source $HOME/dotfiles/vimrc_local
+if exists($HOME.".vimrc_local")
+    source $HOME/.vimrc_local
 endif
