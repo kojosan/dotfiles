@@ -184,4 +184,4 @@ alias gsl="git stash list"
 alias gsp="git stash pop"
 
 # gibo completion
-[ -f ~/.gibo-completion.zsh ] && source ~/.zshrc_local
+[ -f ~/.gibo-completion.zsh ] && source ~/.gibo-completion.zsh
