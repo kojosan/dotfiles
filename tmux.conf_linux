@@ -12,9 +12,9 @@ set-option -g set-titles-string "@#(hostname | sed 's/\\\\..*//')"
 
 # ステータスラインカスタム関連
 # 左部:whoami@hostname
-# set -g status-left '#[fg=green,bold][#20(whoami)@#H]#[default]'
+set -g status-left '#[fg=green,bold][#20(whoami)@#H]#[default]'
 # 右部:[2011/03/06(Sun)20:21]
-# set -g status-right '#[fg=green,bold][%Y/%m/%d(%a)%H:%M]#[default]'
+set -g status-right '#[fg=green,bold][%Y/%m/%d(%a)%H:%M]#[default]'
 
 # ヒストリー
 set-option -g history-limit 10000
@@ -28,7 +28,7 @@ set-option -g mouse-select-pane on
 # default statusbar colors
 set-option -g status-bg colour235 #base02
 set-option -g status-fg colour136 #yellow
-set-option -g status-attr default
+# set-option -g status-attr default
 
 # default window title colors
 set-window-option -g window-status-fg colour244 #base0
