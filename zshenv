@@ -1,7 +1,5 @@
 [ -f ~/.zshenv_local ] && source ~/.zshenv_local
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
 typeset -T C_INCLUDE_PATH c_include_path
 typeset -T CPLUS_INCLUDE_PATH cplus_include_path
 typeset -T LIBRARY_PATH library_path

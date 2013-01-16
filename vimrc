@@ -468,7 +468,7 @@ let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|::'
 let g:clang_complete_auto=0
 " libclang を使用して高速に補完を行う
 let g:clang_use_library=1
-let g:clang_library_path='/opt/local/libexec/llvm-3.2/lib/'
+let g:clang_library_path='/opt/local/libexec/llvm-3.3/lib/'
 " clang のコマンドオプション
 let g:clang_user_options =
     \ "-I /opt/local/include/ ".
@@ -549,7 +549,7 @@ endif
 "---C/C++ settings---
 autocmd FileType c,cpp,cs,cuda setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 nowrap
 autocmd BufNewFile *.cpp 0r $VIMFILES/templates/template.cpp
-autocmd FileType c,cpp set path+=/opt/local/include,~/include
+autocmd FileType c,cpp set path+=/opt/local/include,~/include,src
 
 
 "---Python settings---

@@ -157,9 +157,8 @@ linux*)
     ;;
 esac
 
-# local setting file
-[ -f ~/.zshrc_local ] && source ~/.zshrc_local
-
+alias mv='mv -v'
+alias ls='ls -F --color'
 
 # tmux
 alias tm='tmux'
@@ -173,7 +172,7 @@ alias tml='tmux list-sessions'
 alias g='git'
 alias ga='git add'
 alias gs='git status -s -b'
-alias gl='git log --stat --graph --oneline --color'
+alias gl='git log --stat --graph --oneline'
 alias gc='git commit -v'
 alias gca='git commit -va'
 alias gcm='git commit -vm'
@@ -182,6 +181,11 @@ alias gdc="git diff --cached --color"
 alias gss="git stash save"
 alias gsl="git stash list"
 alias gsp="git stash pop"
+
+alias reload="source ~/.zshenv ~/.zshenv"
+
+# local setting file
+[ -f ~/.zshrc_local ] && source ~/.zshrc_local
 
 # gibo completion
 [ -f ~/.gibo-completion.zsh ] && source ~/.gibo-completion.zsh
