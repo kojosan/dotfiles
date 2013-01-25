@@ -103,21 +103,17 @@ log
 setopt ignore_eof
 
 # ウィンドウタイトル
-## 実行中のコマンドとユーザ名とホスト名とカレントディレクトリを表示。
-update_title() {
-    local command_line=
-    typeset -a command_line
-    command_line=${(z)2}
-    local command=
-    if [ ${(t)command_line} = "array-local" ]; then
-        command="$command_line[1]"
-    else
-        command="$2"
-fi
-    print -n -P "\e]2;"
-    echo -n "(${command})"
-    print -n -P " %n@%m:%~\a"
-}
+case "${TERM}" in
+kterm*|xterm*)
+    precmd() {
+        echo -ne "\033]0;${PWD}\007"
+    }
+    ;;
+esac
+
+# if [ -n "$DISPLAY" ]; then
+    preexec_functions=($preexec_functions update_title)
+# fi
 
 # ls表示のカラー設定
 export LSCOLORS=exfxcxdxbxegedabagacad
@@ -139,13 +135,6 @@ RPROMPT=""
 # TMOUT=30
 
 # タイトルバー
-case "${TERM}" in
-kterm*|xterm*)
-    precmd() {
-        echo -ne "\033]0;${PWD}\007"
-    }
-    ;;
-esac
 
 
 alias mv='mv -v'
