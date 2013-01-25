@@ -147,18 +147,10 @@ kterm*|xterm*)
     ;;
 esac
 
-# OS毎の設定ファイル
-case "${OSTYPE}" in
-darwin*)
-    [ -f ~/dotfiles/zshrc_osx ] && source ~/dotfiles/zshrc_osx
-    ;;
-linux*)
-    [ -f ~/dotfiles/zshrc_linux ] && source ~/dotfiles/zshrc_linux
-    ;;
-esac
 
 alias mv='mv -v'
 alias ls='ls -F --color'
+alias ls='cp -v'
 
 # tmux
 alias tm='tmux'
@@ -183,6 +175,16 @@ alias gsl="git stash list"
 alias gsp="git stash pop"
 
 alias reload="source ~/.zshenv ~/.zshenv"
+
+# OS毎の設定ファイル
+case "${OSTYPE}" in
+darwin*)
+    [ -f ~/dotfiles/zshrc_osx ] && source ~/dotfiles/zshrc_osx
+    ;;
+linux*)
+    [ -f ~/dotfiles/zshrc_linux ] && source ~/dotfiles/zshrc_linux
+    ;;
+esac
 
 # local setting file
 [ -f ~/.zshrc_local ] && source ~/.zshrc_local
