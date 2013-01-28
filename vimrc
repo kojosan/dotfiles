@@ -217,6 +217,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" 検索後、画面の中心に
+nmap n nzz
+nmap N Nzz
+
 "----------------------------------------
 " 挿入モード
 "----------------------------------------
@@ -354,35 +358,36 @@ set nocompatible
 filetype off
 set rtp+=$VIMFILES/neobundle.vim
 call neobundle#rc()
-NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'Align'
+NeoBundle 'Rip-Rip/clang_complete.git'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/unite.vim.git'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'gerw/vim-latex-suite'
-NeoBundle 'mitechie/pyflakes-pathogen'
-NeoBundle 'vim-scripts/pythoncomplete'
-NeoBundle 'tyru/caw.vim'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle "thinca/vim-fontzoom"
-NeoBundle 'tpope/vim-surround'
-NeoBundle "jceb/vim-hier"
-NeoBundle 'vim-scripts/gtags.vim'
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle "Shougo/neosnippet"
-NeoBundle "Rip-Rip/clang_complete.git"
-NeoBundle 'textobj-user'
+NeoBundle 'glidenote/memolist.vim'
+NeoBundle 'jceb/vim-hier'
 NeoBundle 'kana/vim-textobj-function.git'
 NeoBundle 'kana/vim-textobj-indent.git'
-NeoBundle 'thinca/vim-textobj-plugins.git'
-NeoBundle 'Align'
-NeoBundle 'Source-Explorer-srcexpl.vim'
-NeoBundle "Shougo/unite.vim.git"
-NeoBundle "taglist.vim"
-NeoBundle "tpope/vim-markdown"
-NeoBundle "tyru/open-browser.vim"
-NeoBundle 'glidenote/memolist.vim'
-NeoBundle 'operator-user'
+NeoBundle 'mitechie/pyflakes-pathogen'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'operator-replace'
+NeoBundle 'operator-user'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'taglist.vim'
+NeoBundle 'textobj-user'
+NeoBundle 'thinca/vim-fontzoom'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'thinca/vim-textobj-plugins.git'
+NeoBundle 'tpope/vim-markdown'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tyru/caw.vim'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'vim-scripts/gtags.vim'
+NeoBundle 'vim-scripts/pythoncomplete'
+NeoBundle 'vim-scripts/Trinity'
+NeoBundle 'wesleyche/SrcExpl'
 filetype plugin indent on
 
 "---operator-replace---
@@ -402,24 +407,20 @@ let g:quickrun_config['markdown'] = {
         \ 'outputter': 'null'
         \ }
 
-"---taglist---
-nmap <Leader>t :TlistToggle<CR>
-let Tlist_Exit_OnlyWindow = 1
-
 "---Unite.vim---
 " 縦分割で開く
 let g:unite_enable_split_vertically = 1
 let g:unite_winwidth = 80
-" バッファ一覧
-nmap <C-u>b :Unite buffer<CR>
-" PWDのファイル一覧
-nmap <C-u>f :UniteWithBufferDir -buffer-name=file file<CR>
-" 最近使用したファイル一覧
-nmap <C-u>m :Unite file_mru<CR>
-" レジスタ一覧
-nmap <C-u>r :Unite -buffer-name=register register<CR>
+" " バッファ一覧
+" nmap <C-u>b :Unite buffer<CR>
+" " PWDのファイル一覧
+" nmap <C-u>f :UniteWithBufferDir -buffer-name=file file<CR>
+" " 最近使用したファイル一覧
+" nmap <C-u>m :Unite file_mru<CR>
+" " レジスタ一覧
+" nmap <C-u>r :Unite -buffer-name=register register<CR>
 " ファイルとバッファ一覧
-nmap <C-u>u :Unite buffer file file_mru<CR>
+nmap <Leader>u :Unite buffer file file_mru<CR>
 
 "---syntastic---
 let g:syntastic_enable_signs=1
@@ -428,7 +429,26 @@ let g:syntastic_auto_loc_list=2
 "---NERDTree---
 nmap <Leader>n :NERDTreeToggle<CR>
 
-"---caw---
+"---taglist---
+nmap <Leader>t :TlistToggle<CR>
+let Tlist_Exit_OnlyWindow = 1
+
+"---Source Explorer---
+nmap <Leader>s :SrcExplToggle<CR>
+let g:SrcExpl_refreshTime = 100
+let g:SrcExpl_isUpdateTags = 1
+
+"---Trinity---
+" Open and close all the three plugins on the same time
+nmap <F8>   :TrinityToggleAll<CR>
+" Open and close the srcexpl.vim separately
+nmap <F9>   :TrinityToggleSourceExplorer<CR>
+" Open and close the taglist.vim separately
+nmap <F10>  :TrinityToggleTagList<CR>
+" Open and close the NERD_tree.vim separately
+nmap <F11>  :TrinityToggleNERDTree<CR>
+
+"---caw (comment out)---
 nmap <Leader>c <Plug>(caw:I:toggle)
 vmap <Leader>c <Plug>(caw:I:toggle)
 
@@ -471,28 +491,28 @@ let g:clang_use_library=1
 let g:clang_library_path='/opt/local/libexec/llvm-3.3/lib/'
 " clang のコマンドオプション
 let g:clang_user_options =
-    \ "-I /opt/local/include/ ".
     \ "-I ~/include/ " .
+    \ "-I /opt/local/include/ ".
+    \ "-I /usr/local/include/ " .
+    \ "-I /usr/include/ " .
     \ '-fms-extensions -fgnu-runtime '.
     \ '-include malloc.h '
 
-"---Source Explorer---
-let g:SrcExpl_RefreshTime = 1
-let g:SrcExpl_UpdateTags = 1
-nmap <C-s> :SrcExplToggle<CR>
-
 "---indent-guides---
-let g:indent_guides_guide_size=4
+nmap <Leader>i :IndentGuidesToggle<CR>
+let g:indent_guides_auto_colors = 1
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
 
 "---GNU global---
 " 検索ウインドウを閉じる
 nnoremap <C-q> <C-w><C-w><C-w>q
 " grepする
-nnoremap <C-g> :Gtags -g 
+nnoremap <C-g>g :Gtags -g 
 " カーソル下の定義を探す
-nnoremap <C-s> :Gtags <C-r><C-w><CR>
+nnoremap <C-g>c :Gtags <C-r><C-w><CR>
 " カーソル下が参照されている場所を探す
-nnoremap <C-c> :Gtags -r <C-r><C-w><CR>
+nnoremap <C-g>r :Gtags -r <C-r><C-w><CR>
 " 次/前の検索結果
 nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cp<CR>
@@ -549,7 +569,7 @@ endif
 "---C/C++ settings---
 autocmd FileType c,cpp,cs,cuda setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 nowrap
 autocmd BufNewFile *.cpp 0r $VIMFILES/templates/template.cpp
-autocmd FileType c,cpp set path+=/opt/local/include,~/include,src
+autocmd FileType c,cpp set path+=src,~/include,/opt/local/include,/usr/local/include,/usr/include
 
 
 "---Python settings---
@@ -562,9 +582,9 @@ function! s:Exec()
     exe "!" . &ft . " %"
     :endfunction
 command! Exec call <SID>Exec() 
-map <silent> <C-P> :call <SID>Exec()<CR>
-nmap <F5> :!python %<CR>
-nmap <F12> :!python -m pdb %<CR>
+map <silent> <Leader>p :call <SID>Exec()<CR>
+" nmap <F5> :!python %<CR>
+" nmap <F12> :!python -m pdb %<CR>
 
 " python completion
 autocmd FileType python set omnifunc=pythoncomplete#Complete
