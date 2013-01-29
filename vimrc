@@ -369,6 +369,7 @@ NeoBundle 'glidenote/memolist.vim'
 NeoBundle 'jceb/vim-hier'
 NeoBundle 'kana/vim-textobj-function.git'
 NeoBundle 'kana/vim-textobj-indent.git'
+NeoBundle 'kana/vim-textobj-syntax.git'
 NeoBundle 'mitechie/pyflakes-pathogen'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'operator-replace'
@@ -376,6 +377,7 @@ NeoBundle 'operator-user'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'taglist.vim'
+NeoBundle 'sequence'
 NeoBundle 'textobj-user'
 NeoBundle 'thinca/vim-fontzoom'
 NeoBundle 'thinca/vim-quickrun'
@@ -388,7 +390,19 @@ NeoBundle 'vim-scripts/gtags.vim'
 NeoBundle 'vim-scripts/pythoncomplete'
 NeoBundle 'vim-scripts/Trinity'
 NeoBundle 'wesleyche/SrcExpl'
+NeoBundle 'https://bitbucket.org/abudden/taghighlight'
+NeoBundle 'h1mesuke/textobj-wiw'
+" NeoBundle 'csv.vim'
+" NeoBundle 'c.vim'
 filetype plugin indent on
+
+"---sequence---
+vmap <m-a> <plug>SequenceV_Increment
+vmap <m-x> <plug>SequenceV_Decrement
+nmap <m-a> <plug>SequenceN_Increment
+nmap <m-x> <plug>SequenceN_Decrement
+vmap <c-a> <plug>SequenceAdd
+vmap <c-x> <plug>SequenceSubtract
 
 "---operator-replace---
 nmap R <Plug>(operator-replace)
