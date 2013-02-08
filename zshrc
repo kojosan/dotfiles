@@ -140,6 +140,7 @@ RPROMPT=""
 alias mv='mv -v'
 alias ls='ls -F --color'
 alias ls='cp -v'
+alias ls='rm -v'
 
 # tmux
 alias tm='tmux'
@@ -163,7 +164,7 @@ alias gss="git stash save"
 alias gsl="git stash list"
 alias gsp="git stash pop"
 
-alias reload="source ~/.zshenv ~/.zshenv"
+alias reload="source ~/.zshrc ~/.zshprofile"
 
 # OS毎の設定ファイル
 case "${OSTYPE}" in

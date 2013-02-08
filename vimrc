@@ -454,19 +454,19 @@ let g:SrcExpl_isUpdateTags = 1
 
 "---Trinity---
 " Open and close all the three plugins on the same time
-nmap <F8>   :TrinityToggleAll<CR>
+nmap <F7>   :TrinityToggleAll<CR>
 " Open and close the srcexpl.vim separately
-nmap <F9>   :TrinityToggleSourceExplorer<CR>
+nmap <F8>   :TrinityToggleSourceExplorer<CR>
 " Open and close the taglist.vim separately
-nmap <F10>  :TrinityToggleTagList<CR>
+nmap <F9>  :TrinityToggleTagList<CR>
 " Open and close the NERD_tree.vim separately
-nmap <F11>  :TrinityToggleNERDTree<CR>
+nmap <F10>  :TrinityToggleNERDTree<CR>
 
 "---caw (comment out)---
 nmap <Leader>c <Plug>(caw:I:toggle)
 vmap <Leader>c <Plug>(caw:I:toggle)
 
-"---neocomplcache---
+"---neocomplcache & neosnippet---
 " disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplcache.
@@ -482,12 +482,40 @@ let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 " neocomplcache で表示される補完の数を増やす
 let g:neocomplcache_max_list=1000
+" Enable omni completion. Not required if they are already set elsewhere in .vimrc
+" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" " Enable heavy omni completion, which require computational power and may stall the vim. 
+" if !exists('g:neocomplcache_omni_patterns')
+"   let g:neocomplcache_omni_patterns = {}
+" endif
+" let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+" "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+" let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+" let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
+" let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 
-"---neocomplcache-snippets-complete---
-let g:NeoComplCache_SnippetsDir = "$VIMFILES/snippets"
-" TABでスニペットを展開
-imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neocomplcache_snippets_expand)
+let g:neosnippet#snippets_directory='$VIMFILES/snippets'
+
+" <TAB>: completion.
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" Plugin key-mappings.
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+" SuperTab like snippets behavior.
+" imap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+" smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" For snippet_complete marker.
+" if has('conceal')
+"   set conceallevel=2 concealcursor=i
+" endif
+
+
 
 "---clang_complete---
 "neocomplcache 側の設定
@@ -503,6 +531,8 @@ let g:clang_complete_auto=0
 " libclang を使用して高速に補完を行う
 let g:clang_use_library=1
 let g:clang_library_path='/opt/local/libexec/llvm-3.3/lib/'
+" clang snippets
+let g:clang_snippets=1
 " clang のコマンドオプション
 let g:clang_user_options =
     \ "-I ~/include/ " .
@@ -528,8 +558,8 @@ nnoremap <C-g>c :Gtags <C-r><C-w><CR>
 " カーソル下が参照されている場所を探す
 nnoremap <C-g>r :Gtags -r <C-r><C-w><CR>
 " 次/前の検索結果
-nnoremap <C-n> :cn<CR>
-nnoremap <C-p> :cp<CR>
+" nnoremap <C-n> :cn<CR>
+" nnoremap <C-p> :cp<CR>
 
 "---solarized---
 syntax enable
