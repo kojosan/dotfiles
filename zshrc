@@ -164,7 +164,7 @@ alias gss="git stash save"
 alias gsl="git stash list"
 alias gsp="git stash pop"
 
-alias reload="source ~/.zshrc ~/.zshprofile"
+alias reload="source ~/.zshrc ~/.zprofile"
 
 # OS毎の設定ファイル
 case "${OSTYPE}" in
