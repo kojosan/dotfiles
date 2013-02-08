@@ -1,4 +1,4 @@
-[ -f ~/.zshprofile_local ] && source ~/.zshprofile_local
+[ -f ~/.zprofile_local ] && source ~/.zprofile_local
 
 typeset -T C_INCLUDE_PATH c_include_path
 typeset -T CPLUS_INCLUDE_PATH cplus_include_path
