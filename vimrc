@@ -137,14 +137,34 @@ set ruler
 set shellxquote=
 
 """"""""""""""""""""""""""""""
+" 印刷設定
+""""""""""""""""""""""""""""""
+set printoptions=wrap:y,number:y
+" set printfont=Monaco:h7
+set printheader=%t%=%N
+set printencoding=utf-8
+" set printmbcharset=JIS_X_1990
+
+set printmbfont=
+" 普通文字のフォント
+set printmbfont+=r:Osaka-Mono:h7
+" 太字 (bold) のフォント
+set printmbfont+=,b:Osaka-Mono
+" 斜体文字 (italic) のフォント。未設定時はrフラグを使用する。
+set printmbfont+=,r:Osaka-Mono
+" 太字斜体文字 (bold-italic) のフォント。未設定時はbフラグを使用する。
+set printmbfont+=,o:Osaka-Mono
+
+""""""""""""""""""""""""""""""
 " ステータスラインに文字コード等表示
 " iconvが使用可能の場合、カーソル上の文字コードをエンコードに応じた表示にするFencB()を使用
 """"""""""""""""""""""""""""""
 if has('iconv')
-    set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=[0x%{FencB()}]\ (%v,%l)/%L%8P\ 
+    set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=[0x%{FencB()}]\ [wc:%{WordCount()}]\ (%v,%l)/%L%8P\ 
 else
-    set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ (%v,%l)/%L%8P\ 
+    set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ [wc:%{WordCount()}]\ (%v,%l)/%L%8P\ 
 endif
+" set updatetime=500
 
 " FencB() : カーソル上の文字コードをエンコードに応じた表示にする
 function! FencB()
@@ -349,6 +369,43 @@ inoremap "" ""<LEFT>
 inoremap '' ''<LEFT>
 inoremap <> <><LEFT>
 
+""""""""""""""""""""""""""""""
+" 文字数をカウント
+""""""""""""""""""""""""""""""
+augroup WordCount
+  autocmd!
+  autocmd BufWinEnter,InsertLeave,CursorHold * call WordCount('char')
+augroup END
+
+let s:WordCountStr = ''
+let s:WordCountDict = {'word': 2, 'char': 3, 'byte': 4}
+function! WordCount(...)
+  if a:0 == 0
+    return s:WordCountStr
+  endif
+  let cidx = 3
+  silent! let cidx = s:WordCountDict[a:1]
+
+  let s:WordCountStr = ''
+  let s:saved_status = v:statusmsg
+  exec "silent normal! g\<c-g>"
+  if v:statusmsg !~ '^--'
+    let str = ''
+    silent! let str = split(v:statusmsg, ';')[cidx]
+    let cur = str2nr(matchstr(str, '\d\+'))
+    let end = str2nr(matchstr(str, '\d\+\s*$'))
+    if a:1 == 'char'
+      " ここで(改行コード数*改行コードサイズ)を'g<C-g>'の文字数から引く
+      let cr = &ff == 'dos' ? 2 : 1
+      let cur -= cr * (line('.') - 1)
+      let end -= cr * line('$')
+    endif
+    let s:WordCountStr = printf('%d/%d', cur, end)
+  endif
+  let v:statusmsg = s:saved_status
+  return s:WordCountStr
+endfunction
+
 "----------------------------------------
 " 各種プラグイン設定
 "----------------------------------------
@@ -392,6 +449,7 @@ NeoBundle 'vim-scripts/Trinity'
 NeoBundle 'wesleyche/SrcExpl'
 NeoBundle 'https://bitbucket.org/abudden/taghighlight'
 NeoBundle 'h1mesuke/textobj-wiw'
+NeoBundle 'renamer.vim'
 " NeoBundle 'csv.vim'
 " NeoBundle 'c.vim'
 filetype plugin indent on
@@ -563,9 +621,12 @@ nnoremap <C-g>r :Gtags -r <C-r><C-w><CR>
 
 "---solarized---
 syntax enable
+
 set background=dark
 set t_Co=256
 let g:solarized_termcolors=16
+let g:solarized_italic=0    "default value is 1
+let g:solarized_visibility="high"    "default value is normal
 colorscheme solarized
 
 "----------------------------------------
@@ -574,7 +635,7 @@ colorscheme solarized
 
 
 "---Tex settings---
-autocmd FileType tex setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd FileType tex setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 imdisable
 autocmd BufNewFile *.tex 0r $VIMFILES/templates/template.tex
 " Vim-LaTeX
 " ':TTarget dvi' or ':TTarget pdf' でターゲット変更
@@ -587,7 +648,7 @@ let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_FormatDependency_ps = 'dvi,ps'
 let g:Tex_FormatDependency_pdf = 'dvi,pdf'
 let g:Tex_FormatDependency_eps = 'dvi,eps'
-" let g:Tex_AutoFolding = 0
+let g:Tex_AutoFolding = 0
 if has("win32") || has("win64")
     let g:Tex_CompileRule_dvi = 'platex -kanji=utf8 -guess-input-enc -synctex=1 -interaction=nonstopmode $*'
     let g:Tex_CompileRule_ps = 'dvips -Ppdf -t a4 -o $*.ps $*.dvi'
