@@ -450,6 +450,7 @@ NeoBundle 'wesleyche/SrcExpl'
 NeoBundle 'https://bitbucket.org/abudden/taghighlight'
 NeoBundle 'h1mesuke/textobj-wiw'
 NeoBundle 'renamer.vim'
+NeoBundle 'SingleCompile'
 " NeoBundle 'csv.vim'
 " NeoBundle 'c.vim'
 filetype plugin indent on
