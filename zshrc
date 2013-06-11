@@ -88,6 +88,10 @@ setopt no_beep
 ## 辞書順ではなく数字順に並べる。
 setopt numeric_glob_sort
 
+## Rename
+autoload -Uz zmv
+alias zmv='noglob zmv -W'
+
 # 実行時間
 ## 実行したプロセスの消費時間が3秒以上かかったら
 ## 自動的に消費時間の統計情報を表示する。
