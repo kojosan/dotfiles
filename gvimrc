@@ -39,7 +39,7 @@ endif
 カラー設定:
 let g:solarized_italic=0    "default value is 1
 let g:solarized_contrast="high"    "default value is normal
-let g:solarized_visibility="high"    "default value is normal
+let g:solarized_visibility="normal"    "default value is normal
 syntax enable
 set background=light
 colorscheme solarized
@@ -114,3 +114,5 @@ unlet s:infofile
 " amenu <silent> 10.400 &File.現バッファ差分表示(&D)<Tab>:DiffOrig  :DiffOrig<CR>
 " amenu <silent> 10.401 &File.裏バッファと差分表示(&D)<Tab>:Diff\ #  :Diff #<CR>
 " amenu <silent> 10.402 &File.差分表示(&D)<Tab>:Diff  :browse vertical diffsplit<CR>
+
+autocmd FileType tex setl imdisable

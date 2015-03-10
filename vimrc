@@ -423,7 +423,6 @@ NeoBundle 'Shougo/unite.vim.git'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'gerw/vim-latex-suite'
 NeoBundle 'glidenote/memolist.vim'
-NeoBundle 'jceb/vim-hier'
 NeoBundle 'kana/vim-textobj-function.git'
 NeoBundle 'kana/vim-textobj-indent.git'
 NeoBundle 'kana/vim-textobj-syntax.git'
@@ -451,9 +450,15 @@ NeoBundle 'https://bitbucket.org/abudden/taghighlight'
 NeoBundle 'h1mesuke/textobj-wiw'
 NeoBundle 'renamer.vim'
 NeoBundle 'SingleCompile'
+NeoBundle 'fuenor/im_control.vim'
+NeoBundle 'tpope/vim-fugitive'
+" NeoBundle 'kannokanno/previm'
 " NeoBundle 'csv.vim'
 " NeoBundle 'c.vim'
 filetype plugin indent on
+
+"---previm---
+let g:previm_open_cmd = "open"
 
 "---sequence---
 vmap <m-a> <plug>SequenceV_Increment
@@ -480,6 +485,7 @@ let g:quickrun_config['markdown'] = {
         \ 'outputter': 'null'
         \ }
 
+
 "---Unite.vim---
 " 縦分割で開く
 let g:unite_enable_split_vertically = 1
@@ -498,6 +504,7 @@ nmap <Leader>u :Unite buffer file file_mru<CR>
 "---syntastic---
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
+nmap <Leader>e :Errors<CR><C-w>j
 
 "---NERDTree---
 nmap <Leader>n :NERDTreeToggle<CR>
@@ -627,7 +634,7 @@ set background=dark
 set t_Co=256
 let g:solarized_termcolors=16
 let g:solarized_italic=0    "default value is 1
-let g:solarized_visibility="high"    "default value is normal
+let g:solarized_visibility="normal"    "default value is normal
 colorscheme solarized
 
 "----------------------------------------
@@ -664,13 +671,28 @@ elseif has("macunix")
     let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -t a4 -o $*.ps $*.dvi'
     let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx -p a4 $*.dvi'
     let g:Tex_CompileRule_eps = '/usr/texbin/dvips -E -Ppdf -x 5000 -o $*.eps $*.dvi'
-    let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
+    let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex -kanji=utf8'
     let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex $*.idx'
     let g:Tex_UseEditorSettingInDVIViewer = 1
     let g:Tex_ViewRule_dvi = '/usr/bin/open -a PictPrinter.app'
     let g:Tex_ViewRule_ps = '/usr/local/bin/gv --watch'
     let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
 endif
+
+"---XML settings---
+autocmd FileType xml,owl setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 nowrap
+
+"---Java settings---
+autocmd FileType java setl expandtab tabstop=4 shiftwidth=4 softtabstop=4 nowrap
+
+"---Javascript settings---
+autocmd FileType javascript setl expandtab tabstop=4 shiftwidth=4 softtabstop=4 nowrap
+
+"---html settings---
+autocmd FileType html setl expandtab tabstop=4 shiftwidth=4 softtabstop=4 nowrap
+
+"---css settings---
+autocmd FileType css setl expandtab tabstop=4 shiftwidth=4 softtabstop=4 nowrap
 
 "---C/C++ settings---
 autocmd FileType c,cpp,cs,cuda setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 nowrap
@@ -700,7 +722,7 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd BufNewFile *.sh 0r $VIMFILES/templates/template.sh
 
 "---shell script settings---
-autocmd FileType markdown,md setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType markdown,md setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 " read local vimrc file
 if exists($HOME.".vimrc_local")
