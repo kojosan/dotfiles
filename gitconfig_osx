@@ -17,4 +17,12 @@
 	keepBackup = false
 [diff]
 	external = p4diff
+[git-media]
+	transport = local
+	autodownload = false
 
+	# settings for local transport
+	localpath = /Users/kojo/work/git-media-store
+[filter "media"]
+	clean = git-media filter-clean
+	smudge = git-media filter-smudge
