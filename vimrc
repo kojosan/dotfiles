@@ -423,7 +423,6 @@ NeoBundle 'Shougo/unite.vim.git'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'gerw/vim-latex-suite'
 NeoBundle 'glidenote/memolist.vim'
-NeoBundle 'kana/vim-textobj-function.git'
 NeoBundle 'kana/vim-textobj-indent.git'
 NeoBundle 'kana/vim-textobj-syntax.git'
 NeoBundle 'mitechie/pyflakes-pathogen'
@@ -452,6 +451,7 @@ NeoBundle 'renamer.vim'
 NeoBundle 'SingleCompile'
 NeoBundle 'fuenor/im_control.vim'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'neilagabriel/vim-geeknote'
 " NeoBundle 'kannokanno/previm'
 " NeoBundle 'csv.vim'
 " NeoBundle 'c.vim'
@@ -636,6 +636,13 @@ let g:solarized_termcolors=16
 let g:solarized_italic=0    "default value is 1
 let g:solarized_visibility="normal"    "default value is normal
 colorscheme solarized
+
+"---geeknote---
+let g:GeeknoteMaxExplorerWidth=40
+let g:GeeknoteFormat="markdown"
+nnoremap <Leader>l :Geeknote<CR>
+nnoremap <Leader>c :GeeknoteCreateNote 
+
 
 "----------------------------------------
 " 一時設定
