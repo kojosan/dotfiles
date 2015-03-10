@@ -36,10 +36,10 @@ endif
 " コマンドラインの高さ
 " set cmdheight=2
 
-カラー設定:
+" カラー設定:
 let g:solarized_italic=0    "default value is 1
-let g:solarized_contrast="high"    "default value is normal
-let g:solarized_visibility="high"    "default value is normal
+let g:solarized_contrast="normal"    "default value is normal
+let g:solarized_visibility="normal"    "default value is normal
 syntax enable
 set background=light
 colorscheme solarized

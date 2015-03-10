@@ -423,7 +423,6 @@ NeoBundle 'Shougo/unite.vim.git'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'gerw/vim-latex-suite'
 NeoBundle 'glidenote/memolist.vim'
-NeoBundle 'jceb/vim-hier'
 NeoBundle 'kana/vim-textobj-function.git'
 NeoBundle 'kana/vim-textobj-indent.git'
 NeoBundle 'kana/vim-textobj-syntax.git'
@@ -498,6 +497,7 @@ nmap <Leader>u :Unite buffer file file_mru<CR>
 "---syntastic---
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
+nmap <Leader>e :Errors<CR><C-w>j
 
 "---NERDTree---
 nmap <Leader>n :NERDTreeToggle<CR>
