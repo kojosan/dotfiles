@@ -41,7 +41,7 @@ let g:solarized_italic=0    "default value is 1
 let g:solarized_contrast="normal"    "default value is normal
 let g:solarized_visibility="normal"    "default value is normal
 syntax enable
-set background=light
+set background=dark
 colorscheme solarized
 
 " フォント設定

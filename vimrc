@@ -417,7 +417,7 @@ set rtp+=$VIMFILES/neobundle.vim
 call neobundle#rc()
 NeoBundle 'Align'
 NeoBundle 'Rip-Rip/clang_complete.git'
-NeoBundle 'Shougo/neocomplcache'
+" NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/unite.vim.git'
 NeoBundle 'altercation/vim-colors-solarized'
@@ -425,7 +425,7 @@ NeoBundle 'gerw/vim-latex-suite'
 NeoBundle 'glidenote/memolist.vim'
 NeoBundle 'kana/vim-textobj-indent.git'
 NeoBundle 'kana/vim-textobj-syntax.git'
-NeoBundle 'mitechie/pyflakes-pathogen'
+" NeoBundle 'mitechie/pyflakes-pathogen'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'operator-replace'
 NeoBundle 'operator-user'
@@ -452,6 +452,8 @@ NeoBundle 'SingleCompile'
 NeoBundle 'fuenor/im_control.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'neilagabriel/vim-geeknote'
+NeoBundle "mattn/emmet-vim"
+NeoBundle "othree/html5.vim"
 " NeoBundle 'kannokanno/previm'
 " NeoBundle 'csv.vim'
 " NeoBundle 'c.vim'
@@ -641,7 +643,7 @@ colorscheme solarized
 let g:GeeknoteMaxExplorerWidth=40
 let g:GeeknoteFormat="markdown"
 nnoremap <Leader>l :Geeknote<CR>
-nnoremap <Leader>c :GeeknoteCreateNote 
+nnoremap <Leader>n :GeeknoteCreateNote 
 
 
 "----------------------------------------
@@ -696,10 +698,28 @@ autocmd FileType java setl expandtab tabstop=4 shiftwidth=4 softtabstop=4 nowrap
 autocmd FileType javascript setl expandtab tabstop=4 shiftwidth=4 softtabstop=4 nowrap
 
 "---html settings---
-autocmd FileType html setl expandtab tabstop=4 shiftwidth=4 softtabstop=4 nowrap
+autocmd FileType html setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
+
+" " HTML 5 tags
+" syn keyword htmlTagName contained article aside audio bb canvas command datagrid
+" syn keyword htmlTagName contained datalist details dialog embed figure footer
+" syn keyword htmlTagName contained header hgroup keygen mark meter nav output
+" syn keyword htmlTagName contained progress time ruby rt rp section time video
+" syn keyword htmlTagName contained source figcaption main
+"
+" " HTML 5 arguments
+" syn keyword htmlArg contained autofocus autocomplete placeholder min max step
+" syn keyword htmlArg contained contenteditable contextmenu draggable hidden item
+" syn keyword htmlArg contained itemprop list sandbox subject spellcheck
+" syn keyword htmlArg contained novalidate seamless pattern formtarget manifest
+" syn keyword htmlArg contained formaction formenctype formmethod formnovalidate
+" syn keyword htmlArg contained sizes scoped async reversed sandbox srcdoc
+" syn keyword htmlArg contained hidden role
+" syn match htmlArg "\<\(aria-[\-a-zA-Z0-9_]\+\)=" contained
+" syn match htmlArg contained "\s*data-[-a-zA-Z0-9_]\+"
 
 "---css settings---
-autocmd FileType css setl expandtab tabstop=4 shiftwidth=4 softtabstop=4 nowrap
+autocmd FileType css setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 "---C/C++ settings---
 autocmd FileType c,cpp,cs,cuda setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 nowrap
