@@ -359,15 +359,6 @@ augroup vimrc-auto-mkdir
     endfunction
 augroup END
 
-""""""""""""""""""""""""""""""
-" 括弧を入力後に括弧内へ移動
-""""""""""""""""""""""""""""""
-inoremap {} {}<LEFT>
-inoremap [] []<LEFT>
-inoremap () ()<LEFT>
-inoremap "" ""<LEFT>
-inoremap '' ''<LEFT>
-inoremap <> <><LEFT>
 
 """"""""""""""""""""""""""""""
 " 文字数をカウント
@@ -512,6 +503,9 @@ Plug 'altercation/vim-colors-solarized'
 "---行末の空白削除---
 Plug 'bronson/vim-trailing-whitespace'
 
+"---括弧自動入力---
+Plug 'kana/vim-smartinput'
+
 "---ファイラ---
 "------------- VERY IMPORTANT ------------
 "you have to go to .vim/plugin/vimproc.vim and do a ./make
@@ -519,6 +513,7 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'Shougo/vimproc.vim'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim'
+Plug 'Shougo/unite-outline'
 let g:unite_source_history_yank_enable = 1
 try
   let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
@@ -543,6 +538,8 @@ nmap <Leader>um :Unite file_mru<CR>
 nmap <Leader>ur :Unite -buffer-name=register register<CR>
 " ファイルとバッファ一覧
 nmap <Leader>uu :Unite buffer file file_mru<CR>
+" ソースコードアウトライン
+nmap <Leader>uo :Unite outline<CR>
 
 "---ファイル検索---
 " カーソル下の単語を検索
