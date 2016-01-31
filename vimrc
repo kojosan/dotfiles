@@ -413,55 +413,92 @@ call plug#begin('$VIMFILES/plugged')
 
 "---補完---
 Plug 'Shougo/neocomplete.vim'
-" disable AutoComplPop.
+" Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" " Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
-" Use underbar completion.
-let g:neocomplcache_enable_underbar_completion = 1
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-" neocomplcache で表示される補完の数を増やす
-let g:neocomplcache_max_list=1000
-" Enable omni completion. Not required if they are already set elsewhere in .vimrc
-" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-" " Enable heavy omni completion, which require computational power and may stall the vim.
-" if !exists('g:neocomplcache_omni_patterns')
-"   let g:neocomplcache_omni_patterns = {}
-" endif
-" let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-" "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-" let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-" let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-" let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
-" <TAB>: completion.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
 " Plugin key-mappings.
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-" SuperTab like snippets behavior.
-" imap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-" smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-imap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-" For snippet_complete marker.
-" if has('conceal')
-"   set conceallevel=2 concealcursor=i
-" endif
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+" let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 "---スニペット---
-" Plug 'Shougo/neosnippet.vim'
-" let g:neosnippet#snippets_directory='$VIMFILES/snippets'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+let g:neosnippet#snippets_directory='$VIMFILES/snippets'
+
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
 "---シンタックス検証---
 Plug 'scrooloose/syntastic'
@@ -481,6 +518,7 @@ Plug 'bronson/vim-trailing-whitespace'
 "-----------------------------------------
 Plug 'Shougo/vimproc.vim'
 Plug 'Shougo/unite.vim'
+Plug 'Shougo/neomru.vim'
 let g:unite_source_history_yank_enable = 1
 try
   let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
@@ -491,6 +529,20 @@ endtry
 nnoremap <space><space> :split<cr> :<C-u>Unite -start-insert file_rec/async<cr>
 " reset not it is <C-l> normally
 :nnoremap <space>r <Plug>(unite_restart)
+
+" 縦分割で開く
+let g:unite_enable_split_vertically = 1
+let g:unite_winwidth = 80
+" バッファ一覧
+nmap <Leader>ub :Unite buffer<CR>
+" PWDのファイル一覧
+nmap <Leader>uf :UniteWithBufferDir -buffer-name=file file<CR>
+" 最近使用したファイル一覧
+nmap <Leader>um :Unite file_mru<CR>
+" レジスタ一覧
+nmap <Leader>ur :Unite -buffer-name=register register<CR>
+" ファイルとバッファ一覧
+nmap <Leader>uu :Unite buffer file file_mru<CR>
 
 "---ファイル検索---
 " カーソル下の単語を検索
@@ -643,22 +695,6 @@ set background=dark
 set t_Co=256
 colorscheme solarized
 
-"
-""---Unite.vim---
-"" 縦分割で開く
-"let g:unite_enable_split_vertically = 1
-"let g:unite_winwidth = 80
-"" " バッファ一覧
-"" nmap <C-u>b :Unite buffer<CR>
-"" " PWDのファイル一覧
-"" nmap <C-u>f :UniteWithBufferDir -buffer-name=file file<CR>
-"" " 最近使用したファイル一覧
-"" nmap <C-u>m :Unite file_mru<CR>
-"" " レジスタ一覧
-"" nmap <C-u>r :Unite -buffer-name=register register<CR>
-"" ファイルとバッファ一覧
-"nmap <Leader>u :Unite buffer file file_mru<CR>
-"
 ""---taglist---
 "nmap <Leader>t :TlistToggle<CR>
 "let Tlist_Exit_OnlyWindow = 1
@@ -677,28 +713,26 @@ colorscheme solarized
 "nmap <F9>  :TrinityToggleTagList<CR>
 "" Open and close the NERD_tree.vim separately
 "nmap <F10>  :TrinityToggleNERDTree<CR>
-"
-"
+
 ""----------------------------------------
-"" 一時設定
+"" ファイル毎の設定
 ""----------------------------------------
-"
-"
+
 "---Tex settings---
 autocmd FileType tex setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 imdisable
 autocmd BufNewFile *.tex 0r $VIMFILES/templates/template.tex
 
 "---XML settings---
-autocmd FileType xml,owl setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 nowrap
+autocmd FileType xml,owl setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 nowrap omnifunc=xmlcomplete#CompleteTags
 
 "---Java settings---
 autocmd FileType java setl expandtab tabstop=4 shiftwidth=4 softtabstop=4 nowrap
 
 "---Javascript settings---
-autocmd FileType javascript setl expandtab tabstop=4 shiftwidth=4 softtabstop=4 nowrap
+autocmd FileType javascript setl expandtab tabstop=4 shiftwidth=4 softtabstop=4 nowrap omnifunc=javascriptcomplete#CompleteJS
 
 "---html settings---
-autocmd FileType html setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType html setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 omnifunc=htmlcomplete#CompleteTags
 
 " " HTML 5 tags
 " syn keyword htmlTagName contained article aside audio bb canvas command datagrid
@@ -719,7 +753,7 @@ autocmd FileType html setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
 " syn match htmlArg contained "\s*data-[-a-zA-Z0-9_]\+"
 
 "---css settings---
-autocmd FileType css setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType css setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 omnifunc=csscomplete#CompleteCSS
 
 "---C/C++ settings---
 autocmd FileType c,cpp,cs,cuda setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 nowrap
@@ -728,8 +762,7 @@ autocmd FileType c,cpp set path+=src,~/include,/opt/local/include,/usr/local/inc
 
 
 "---Python settings---
-autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd FileType python setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class omnifunc=pythoncomplete#Complete expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd BufNewFile *.py 0r $VIMFILES/templates/template.py
 
 " python script execution
@@ -741,15 +774,15 @@ map <silent> <Leader>p :call <SID>Exec()<CR>
 " nmap <F5> :!python %<CR>
 " nmap <F12> :!python -m pdb %<CR>
 
-" python completion
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-"autocmd FileType python set omnifunc=pysmell#Complete
-
 "---shell script settings---
 autocmd BufNewFile *.sh 0r $VIMFILES/templates/template.sh
 
 "---markdown settings---
-autocmd FileType markdown,md setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd FileType markdown,md setl expandtab tabstop=4 shiftwidth=4 softtabstop=4 omnifunc=htmlcomplete#CompleteTags
+
+""----------------------------------------
+"" その他
+""----------------------------------------
 
 " read local vimrc file
 if exists($HOME.".vimrc_local")
