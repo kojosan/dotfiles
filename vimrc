@@ -160,9 +160,9 @@ set printmbfont+=,o:Osaka-Mono
 " iconvが使用可能の場合、カーソル上の文字コードをエンコードに応じた表示にするFencB()を使用
 """"""""""""""""""""""""""""""
 if has('iconv')
-    set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=[0x%{FencB()}]\ [wc:%{WordCount()}]\ (%v,%l)/%L%8P\ 
+    set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=[0x%{FencB()}]\ [wc:%{WordCount()}]\ (%v,%l)/%L%8P\
 else
-    set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ [wc:%{WordCount()}]\ (%v,%l)/%L%8P\ 
+    set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ [wc:%{WordCount()}]\ (%v,%l)/%L%8P\
 endif
 " set updatetime=500
 
@@ -409,132 +409,10 @@ endfunction
 "----------------------------------------
 " 各種プラグイン設定
 "----------------------------------------
+call plug#begin('$VIMFILES/plugged')
 
-"---plugins---
-set nocompatible
-filetype off
-set rtp+=$VIMFILES/neobundle.vim
-call neobundle#rc()
-NeoBundle 'Align'
-NeoBundle 'Rip-Rip/clang_complete.git'
-" NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/unite.vim.git'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'gerw/vim-latex-suite'
-NeoBundle 'glidenote/memolist.vim'
-NeoBundle 'kana/vim-textobj-indent.git'
-NeoBundle 'kana/vim-textobj-syntax.git'
-" NeoBundle 'mitechie/pyflakes-pathogen'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'operator-replace'
-NeoBundle 'operator-user'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'taglist.vim'
-NeoBundle 'sequence'
-NeoBundle 'textobj-user'
-NeoBundle 'thinca/vim-fontzoom'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'thinca/vim-textobj-plugins.git'
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tyru/caw.vim'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'vim-scripts/gtags.vim'
-NeoBundle 'vim-scripts/pythoncomplete'
-NeoBundle 'vim-scripts/Trinity'
-NeoBundle 'wesleyche/SrcExpl'
-NeoBundle 'https://bitbucket.org/abudden/taghighlight'
-NeoBundle 'h1mesuke/textobj-wiw'
-NeoBundle 'renamer.vim'
-NeoBundle 'SingleCompile'
-NeoBundle 'fuenor/im_control.vim'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'neilagabriel/vim-geeknote'
-NeoBundle "mattn/emmet-vim"
-NeoBundle "othree/html5.vim"
-" NeoBundle 'kannokanno/previm'
-" NeoBundle 'csv.vim'
-" NeoBundle 'c.vim'
-filetype plugin indent on
-
-"---previm---
-let g:previm_open_cmd = "open"
-
-"---sequence---
-vmap <m-a> <plug>SequenceV_Increment
-vmap <m-x> <plug>SequenceV_Decrement
-nmap <m-a> <plug>SequenceN_Increment
-nmap <m-x> <plug>SequenceN_Decrement
-vmap <c-a> <plug>SequenceAdd
-vmap <c-x> <plug>SequenceSubtract
-
-"---operator-replace---
-nmap R <Plug>(operator-replace)
-
-"---memolist---
-map <Leader>mn  :MemoNew<CR>
-map <Leader>ml  :MemoList<CR>
-map <Leader>mg  :MemoGrep<CR>
-let g:memolist_path = "$HOME/Dropbox/memo"
-
-"---quickrun---
-" markdown
-let g:quickrun_config = {}
-let g:quickrun_config['markdown'] = {
-        \ 'exec': ['cat %s|nkf -s|kramdown > memo.html', 'open memo.html'],
-        \ 'outputter': 'null'
-        \ }
-
-
-"---Unite.vim---
-" 縦分割で開く
-let g:unite_enable_split_vertically = 1
-let g:unite_winwidth = 80
-" " バッファ一覧
-" nmap <C-u>b :Unite buffer<CR>
-" " PWDのファイル一覧
-" nmap <C-u>f :UniteWithBufferDir -buffer-name=file file<CR>
-" " 最近使用したファイル一覧
-" nmap <C-u>m :Unite file_mru<CR>
-" " レジスタ一覧
-" nmap <C-u>r :Unite -buffer-name=register register<CR>
-" ファイルとバッファ一覧
-nmap <Leader>u :Unite buffer file file_mru<CR>
-
-"---syntastic---
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=2
-nmap <Leader>e :Errors<CR><C-w>j
-
-"---NERDTree---
-nmap <Leader>n :NERDTreeToggle<CR>
-
-"---taglist---
-nmap <Leader>t :TlistToggle<CR>
-let Tlist_Exit_OnlyWindow = 1
-
-"---Source Explorer---
-nmap <Leader>s :SrcExplToggle<CR>
-let g:SrcExpl_refreshTime = 100
-let g:SrcExpl_isUpdateTags = 1
-
-"---Trinity---
-" Open and close all the three plugins on the same time
-nmap <F7>   :TrinityToggleAll<CR>
-" Open and close the srcexpl.vim separately
-nmap <F8>   :TrinityToggleSourceExplorer<CR>
-" Open and close the taglist.vim separately
-nmap <F9>  :TrinityToggleTagList<CR>
-" Open and close the NERD_tree.vim separately
-nmap <F10>  :TrinityToggleNERDTree<CR>
-
-"---caw (comment out)---
-nmap <Leader>c <Plug>(caw:I:toggle)
-vmap <Leader>c <Plug>(caw:I:toggle)
-
-"---neocomplcache & neosnippet---
+"---補完---
+Plug 'Shougo/neocomplete.vim'
 " disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplcache.
@@ -556,7 +434,7 @@ let g:neocomplcache_max_list=1000
 " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-" " Enable heavy omni completion, which require computational power and may stall the vim. 
+" " Enable heavy omni completion, which require computational power and may stall the vim.
 " if !exists('g:neocomplcache_omni_patterns')
 "   let g:neocomplcache_omni_patterns = {}
 " endif
@@ -565,8 +443,6 @@ let g:neocomplcache_max_list=1000
 " let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 " let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 " let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
-
-let g:neosnippet#snippets_directory='$VIMFILES/snippets'
 
 " <TAB>: completion.
 " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -583,78 +459,137 @@ imap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 "   set conceallevel=2 concealcursor=i
 " endif
 
+"---スニペット---
+" Plug 'Shougo/neosnippet.vim'
+" let g:neosnippet#snippets_directory='$VIMFILES/snippets'
 
+"---シンタックス検証---
+Plug 'scrooloose/syntastic'
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=2
+nmap <Leader>e :Errors<CR><C-w>j
 
-"---clang_complete---
-"neocomplcache 側の設定
-let g:neocomplcache_force_overwrite_completefunc = 1
-if !exists("g:neocomplcache_force_omni_patterns")
-    let g:neocomplcache_force_omni_patterns = {}
-endif
-" omnifunc が呼び出される場合の正規表現パターンを設定しておく
-let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|::'
-" clang_complete 側の設定
-" clang_complete の自動呼び出しは必ず切っておいて下さい
-let g:clang_complete_auto=0
-" libclang を使用して高速に補完を行う
-let g:clang_use_library=1
-let g:clang_library_path='/opt/local/libexec/llvm-3.3/lib/'
-" clang snippets
-let g:clang_snippets=1
-" clang のコマンドオプション
-let g:clang_user_options =
-    \ "-I ~/include/ " .
-    \ "-I /opt/local/include/ ".
-    \ "-I /usr/local/include/ " .
-    \ "-I /usr/include/ " .
-    \ '-fms-extensions -fgnu-runtime '.
-    \ '-include malloc.h '
+"---solarized---
+Plug 'altercation/vim-colors-solarized'
 
-"---indent-guides---
+"---行末の空白削除---
+Plug 'bronson/vim-trailing-whitespace'
+
+"---ファイラ---
+"------------- VERY IMPORTANT ------------
+"you have to go to .vim/plugin/vimproc.vim and do a ./make
+"-----------------------------------------
+Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/unite.vim'
+let g:unite_source_history_yank_enable = 1
+try
+  let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
+  call unite#filters#matcher_default#use(['matcher_fuzzy'])
+catch
+endtry
+" search a file in the filetree
+nnoremap <space><space> :split<cr> :<C-u>Unite -start-insert file_rec/async<cr>
+" reset not it is <C-l> normally
+:nnoremap <space>r <Plug>(unite_restart)
+
+"---ファイル検索---
+" カーソル下の単語を検索
+" ファイル検索
+Plug 'rking/ag.vim'
+nmap <Leader>* :Ag <c-r>=expand("<cword>")<cr><cr>
+nnoremap <Leader>/ :Ag 
+
+"---整列---
+" 範囲行選択してEnter、デリミタ(|や=)を入力してEnter
+" デリミタの左右に挿入するスペースを左右下キー調整
+" 何番目のデリミタで揃えるかをデリミタの前に入力。*で全てのデリミタで揃える。
+Plug 'junegunn/vim-easy-align'
+vnoremap <silent> <Enter> :EasyAlign<cr>
+
+"---メモ管理---
+Plug 'glidenote/memolist.vim'
+map <Leader>mn  :MemoNew<CR>
+map <Leader>ml  :MemoList<CR>
+map <Leader>mg  :MemoGrep<CR>
+let g:memolist_path = "$HOME/Dropbox/memo"
+
+"---コメントトグル---
+Plug 'tyru/caw.vim'
+nmap <Leader>c <Plug>(caw:I:toggle)
+vmap <Leader>c <Plug>(caw:I:toggle)
+
+"---インデント可視化---
+Plug 'nathanaelkane/vim-indent-guides'
 nmap <Leader>i :IndentGuidesToggle<CR>
 let g:indent_guides_auto_colors = 1
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 
-"---GNU global---
-" 検索ウインドウを閉じる
-nnoremap <C-q> <C-w><C-w><C-w>q
-" grepする
-nnoremap <C-g>g :Gtags -g 
-" カーソル下の定義を探す
-nnoremap <C-g>c :Gtags <C-r><C-w><CR>
-" カーソル下が参照されている場所を探す
-nnoremap <C-g>r :Gtags -r <C-r><C-w><CR>
-" 次/前の検索結果
-" nnoremap <C-n> :cn<CR>
-" nnoremap <C-p> :cp<CR>
+"---HTML/CSS---
+Plug 'mattn/emmet-vim'
+Plug 'othree/html5.vim'
 
-"---solarized---
-syntax enable
+"---quickrun---
+Plug 'thinca/vim-quickrun'
+nnoremap <Leader>r :QuickRun<cr>
 
-set background=dark
-set t_Co=256
-let g:solarized_termcolors=16
-let g:solarized_italic=0    "default value is 1
-let g:solarized_visibility="normal"    "default value is normal
-colorscheme solarized
-
-"---geeknote---
-let g:GeeknoteMaxExplorerWidth=40
-let g:GeeknoteFormat="markdown"
-nnoremap <Leader>l :Geeknote<CR>
-nnoremap <Leader>n :GeeknoteCreateNote 
+" markdown
+let g:quickrun_config = {}
+let g:quickrun_config['markdown'] = {
+       \ 'exec': ['cat %s|nkf -s|kramdown > memo.html', 'open memo.html'],
+       \ 'outputter': 'null'
+       \ }
 
 
-"----------------------------------------
-" 一時設定
-"----------------------------------------
+"---テキストオブジェクト---
+" textobj のベース
+Plug 'textobj-user'
 
+" カーソル位置と同じインデント
+" al, il
+Plug 'kana/vim-textobj-indent'
 
-"---Tex settings---
-autocmd FileType tex setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 imdisable
-autocmd BufNewFile *.tex 0r $VIMFILES/templates/template.tex
-" Vim-LaTeX
+" シンタックス
+" ay, iy
+Plug 'kana/vim-textobj-syntax'
+
+" snake_case 上の word
+" a,w, i,w
+Plug 'h1mesuke/textobj-wiw'
+
+"---オペレータ---
+Plug 'operator-user'
+
+"選択したオブジェクトをレジスタの値に置き換える
+Plug 'operator-replace'
+nmap R <Plug>(operator-replace)
+
+"---フォント拡大縮小---
+Plug 'thinca/vim-fontzoom'
+
+"---markdown---
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'kannokanno/previm'
+let g:previm_open_cmd = "open"
+
+"---括弧操作---
+Plug 'tpope/vim-markdown'
+
+"---シーケンス生成---
+Plug 'sequence'
+vmap <m-a> <plug>SequenceV_Increment
+vmap <m-x> <plug>SequenceV_Decrement
+nmap <m-a> <plug>SequenceN_Increment
+nmap <m-x> <plug>SequenceN_Decrement
+vmap <c-a> <plug>SequenceAdd
+vmap <c-x> <plug>SequenceSubtract
+
+"---リネーム---
+Plug 'renamer.vim'
+
+"---Latex---
+Plug 'gerw/vim-latex-suite'
 " ':TTarget dvi' or ':TTarget pdf' でターゲット変更
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
@@ -671,7 +606,7 @@ if has("win32") || has("win64")
     let g:Tex_CompileRule_ps = 'dvips -Ppdf -t a4 -o $*.ps $*.dvi'
     let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
     let g:Tex_BibtexFlavor = 'pbibtex -kanji=utf8'
-    let g:Tex_MakeIndexFlavor = 'mendex -U $*.idx'  
+    let g:Tex_MakeIndexFlavor = 'mendex -U $*.idx'
     let g:Tex_ViewRule_dvi = 'C:/w32tex/dviout/dviout.exe -1'
     let g:Tex_ViewRule_ps = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance'
     let g:Tex_ViewRule_pdf = 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe -reuse-instance -inverse-search "C:\vim73-kaoriya-win32\gvim.exe -n -c \":RemoteOpen +\%l \%f\""'
@@ -687,6 +622,71 @@ elseif has("macunix")
     let g:Tex_ViewRule_ps = '/usr/local/bin/gv --watch'
     let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
 endif
+
+"" NeoBundle 'mitechie/pyflakes-pathogen'
+"Plug 'taglist.vim'
+"Plug 'tyru/open-browser.vim'
+"Plug 'vim-scripts/gtags.vim'
+"Plug 'vim-scripts/Trinity'
+"Plug 'wesleyche/SrcExpl'
+"Plug 'https://bitbucket.org/abudden/taghighlight'
+"Plug 'SingleCompile'
+"Plug 'fuenor/im_control.vim'
+"Plug 'tpope/vim-fugitive'
+" NeoBundle 'csv.vim'
+" NeoBundle 'c.vim'
+call plug#end()
+
+"---colorscheme---
+syntax enable
+set background=dark
+set t_Co=256
+colorscheme solarized
+
+"
+""---Unite.vim---
+"" 縦分割で開く
+"let g:unite_enable_split_vertically = 1
+"let g:unite_winwidth = 80
+"" " バッファ一覧
+"" nmap <C-u>b :Unite buffer<CR>
+"" " PWDのファイル一覧
+"" nmap <C-u>f :UniteWithBufferDir -buffer-name=file file<CR>
+"" " 最近使用したファイル一覧
+"" nmap <C-u>m :Unite file_mru<CR>
+"" " レジスタ一覧
+"" nmap <C-u>r :Unite -buffer-name=register register<CR>
+"" ファイルとバッファ一覧
+"nmap <Leader>u :Unite buffer file file_mru<CR>
+"
+""---taglist---
+"nmap <Leader>t :TlistToggle<CR>
+"let Tlist_Exit_OnlyWindow = 1
+"
+""---Source Explorer---
+"nmap <Leader>s :SrcExplToggle<CR>
+"let g:SrcExpl_refreshTime = 100
+"let g:SrcExpl_isUpdateTags = 1
+"
+""---Trinity---
+"" Open and close all the three plugins on the same time
+"nmap <F7>   :TrinityToggleAll<CR>
+"" Open and close the srcexpl.vim separately
+"nmap <F8>   :TrinityToggleSourceExplorer<CR>
+"" Open and close the taglist.vim separately
+"nmap <F9>  :TrinityToggleTagList<CR>
+"" Open and close the NERD_tree.vim separately
+"nmap <F10>  :TrinityToggleNERDTree<CR>
+"
+"
+""----------------------------------------
+"" 一時設定
+""----------------------------------------
+"
+"
+"---Tex settings---
+autocmd FileType tex setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 imdisable
+autocmd BufNewFile *.tex 0r $VIMFILES/templates/template.tex
 
 "---XML settings---
 autocmd FileType xml,owl setl expandtab tabstop=2 shiftwidth=2 softtabstop=2 nowrap
@@ -734,9 +734,9 @@ autocmd BufNewFile *.py 0r $VIMFILES/templates/template.py
 
 " python script execution
 function! s:Exec()
-    exe "!" . &ft . " %"
-    :endfunction
-command! Exec call <SID>Exec() 
+   exe "!" . &ft . " %"
+   :endfunction
+command! Exec call <SID>Exec()
 map <silent> <Leader>p :call <SID>Exec()<CR>
 " nmap <F5> :!python %<CR>
 " nmap <F12> :!python -m pdb %<CR>
@@ -748,10 +748,10 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 "---shell script settings---
 autocmd BufNewFile *.sh 0r $VIMFILES/templates/template.sh
 
-"---shell script settings---
+"---markdown settings---
 autocmd FileType markdown,md setl expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 " read local vimrc file
 if exists($HOME.".vimrc_local")
-    source $HOME/.vimrc_local
+   source $HOME/.vimrc_local
 endif
