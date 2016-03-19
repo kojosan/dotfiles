@@ -672,6 +672,9 @@ elseif has("macunix")
     let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
 endif
 
+"---scala---
+Plug 'derekwyatt/vim-scala'
+
 "" NeoBundle 'mitechie/pyflakes-pathogen'
 "Plug 'taglist.vim'
 "Plug 'tyru/open-browser.vim'
