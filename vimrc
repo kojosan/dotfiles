@@ -687,6 +687,11 @@ Plug 'derekwyatt/vim-scala'
 "Plug 'tpope/vim-fugitive'
 " NeoBundle 'csv.vim'
 " NeoBundle 'c.vim'
+
+""---csv.vim---
+Plug 'chrisbra/csv.vim'
+let g:csv_highlight_column = 'y'
+
 call plug#end()
 
 "---colorscheme---
@@ -713,6 +718,8 @@ colorscheme solarized
 "nmap <F9>  :TrinityToggleTagList<CR>
 "" Open and close the NERD_tree.vim separately
 "nmap <F10>  :TrinityToggleNERDTree<CR>
+
+
 
 ""----------------------------------------
 "" ファイル毎の設定
